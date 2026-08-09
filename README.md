@@ -6,15 +6,14 @@ A minimal FastAPI portfolio website with a deployed Random Forest microservice. 
 
 - **Portfolio pages** — Home, Projects, Resume, Blog, Contact
 - **Live ML Demo** — Manufacturing Defect Prediction (Random Forest) via `/predict`
-- **Production patterns** — FastAPI, Docker, GitHub Actions, Azure App Service deployment
+- **Production patterns** — FastAPI, Docker, and Render deployment
 
 ## Stack
 
-- FastAPI + Jinja2 + Tailwind CSS (CDN)
+- FastAPI + Jinja2
 - scikit-learn Random Forest
 - Docker
-- GitHub Actions CI/CD
-- Azure App Service (Free F1 tier)
+- Render Web Service
 
 ## Quick Start
 
@@ -46,16 +45,13 @@ Open http://localhost:8000
 
 ## Deployment
 
-1. Create an Azure App Service (Python 3.11, Free F1 tier) named `harshil-portfolio`.
-2. Download the publish profile and add it as GitHub secret `AZURE_WEBAPP_PUBLISH_PROFILE`.
-3. Push to `main` — GitHub Actions will train the model and deploy.
+1. Create a Render Web Service using this repository and the Docker runtime.
+2. Select the `main` branch and set the health-check path to `/health`.
+3. Render automatically redeploys when changes are pushed to `main`.
 
 ## Free Resource Notes
 
-- Azure App Service Free (F1) tier: free forever, custom domain not included.
-- Docker Hub / GitHub Container Registry: free tier.
-- GitHub Actions: free for public repos.
-- Tailwind CDN: free.
+- Render's free service tier spins down after inactivity, so the first request after idle time can take longer.
 
 ## Model
 
@@ -65,5 +61,5 @@ Random Forest trained on 5,000 synthetic manufacturing sensor samples. Features:
 
 - Add blog post engine (Markdown-based)
 - Add actual resume PDF download
-- Add analytics (Azure Application Insights free tier)
+- Add privacy-conscious analytics
 - Add custom domain
