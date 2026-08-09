@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="space-y-8">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-900">Projects</h1>
+        <p class="mt-2 text-gray-600">Production systems, research, and deployed ML demos.</p>
+    </div>
+
+    <div class="grid gap-6">
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900">Production LLM Platform</h2>
+                    <p class="mt-1 text-blue-600 text-sm font-medium">Prowess Consulting | Data & AI Engineering Intern</p>
+                    <p class="mt-3 text-gray-600">LLM-powered WhatsApp inquiry platform for 24/7 automated conversational ordering in pharmaceutical distribution. Built from scratch on Azure App Service with Azure OpenAI intent classification and Snowflake-backed logging.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Azure</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">OpenAI</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Snowflake</span>
+                </div>
+            </div>
+            <ul class="mt-4 space-y-1 text-sm text-gray-600">
+                <li>• 1,500+ product catalog integration</li>
+                <li>• Cart editing and out-of-stock substitute recommendations</li>
+                <li>• GitHub Actions CI/CD with automated tests</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900">SalesVitals</h2>
+                    <p class="mt-1 text-blue-600 text-sm font-medium">Prowess Consulting | Data & AI Engineering Intern</p>
+                    <p class="mt-3 text-gray-600">FastAPI analytics stack surfacing customer insights to pharmaceutical field reps. Designed custom SQLite snapshot mode with GitHub Actions LFS validation to eliminate recurring high-cost Snowflake queries.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">FastAPI</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">SQLite</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Azure OpenAI</span>
+                </div>
+            </div>
+            <ul class="mt-4 space-y-1 text-sm text-gray-600">
+                <li>• Data-grounded talking scripts with Azure OpenAI</li>
+                <li>• Cost-optimized SQLite snapshot architecture</li>
+                <li>• Automated validation via GitHub Actions</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900">Hybrid LSTM + Deep RL Trading Framework</h2>
+                    <p class="mt-1 text-blue-600 text-sm font-medium">IEEE ICCICT 2026 Publication</p>
+                    <p class="mt-3 text-gray-600">Hybrid framework separating forecasting from execution using LSTM and Deep Reinforcement Learning (PPO, DQN, SAC). Validated on NIFTY-50 backtests with risk-adjusted metrics.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">LSTM</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Deep RL</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Python</span>
+                </div>
+            </div>
+            <ul class="mt-4 space-y-1 text-sm text-gray-600">
+                <li>• Sharpe ratio ~1.8 on NIFTY-50 backtests</li>
+                <li>• Enterprise-grade decision support</li>
+                <li>• Reproducible research methodology</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border-2 border-blue-100">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900">Manufacturing Defect Prediction <span class="ml-2 text-xs bg-blue-600 text-white px-2 py-1 rounded-full">Live Demo</span></h2>
+                    <p class="mt-1 text-blue-600 text-sm font-medium">Portfolio ML Demo</p>
+                    <p class="mt-3 text-gray-600">Random Forest classifier deployed as a FastAPI microservice with Docker and CI/CD. Try the live prediction endpoint with real-time sensor inputs.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">FastAPI</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Scikit-learn</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Docker</span>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a href="/demo" class="inline-flex items-center text-blue-600 font-medium hover:text-blue-700">Try the live demo →</a>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900">Distributed Food Delivery App</h2>
+                    <p class="mt-1 text-blue-600 text-sm font-medium">Academic Project</p>
+                    <p class="mt-3 text-gray-600">Java Spring Boot microservices with API Gateway, Eureka, JWT authentication, circuit breakers, and centralized monitoring.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 md:flex-col md:items-end">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Spring Boot</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Microservices</span>
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Java</span>
+                </div>
+            </div>
+            <ul class="mt-4 space-y-1 text-sm text-gray-600">
+                <li>• API Gateway and service discovery</li>
+                <li>• Distributed tracing and monitoring</li>
+                <li>• Circuit breaker resilience patterns</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
