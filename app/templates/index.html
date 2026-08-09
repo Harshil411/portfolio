@@ -1,59 +1,76 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="space-y-8">
-    <section class="bg-white rounded-2xl shadow-sm p-8 md:p-12">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+<div class="space-y-12">
+    <!-- Hero -->
+    <section>
+        <div style="max-width: 48rem;">
+            <p class="font-mono text-accent" style="font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;">
+                Incoming M.S. Data Science @ Virginia Tech
+            </p>
+            <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">
+                Harshil Agrawal
+            </h1>
+            <p class="text-secondary" style="font-size: 1.25rem; line-height: 1.6; max-width: 36rem;">
+                Data & AI Engineer who ships production systems. Built LLM-powered platforms, FastAPI analytics stacks, and published IEEE research on Deep Reinforcement Learning.
+            </p>
+            <div class="flex flex-wrap" style="gap: 1rem; margin-top: 2rem;">
+                <a href="/projects" class="btn btn-primary">View Projects</a>
+                <a href="/demo" class="btn btn-secondary">Live ML Demo</a>
+                <a href="/contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Focus -->
+    <section class="accent-border">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Current Focus</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-                <p class="text-sm font-semibold text-blue-600 uppercase tracking-wide">Incoming M.S. Data Science @ Virginia Tech</p>
-                <h1 class="mt-2 text-4xl md:text-5xl font-bold text-gray-900">Harshil Agrawal</h1>
-                <p class="mt-4 text-lg text-gray-600 max-w-2xl">
-                    Data & AI Engineer who ships production systems. Built LLM-powered platforms, FastAPI analytics stacks, and published IEEE research on Deep Reinforcement Learning.
-                </p>
-                <div class="mt-6 flex flex-wrap gap-3">
-                    <a href="/projects" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition">View Projects</a>
-                    <a href="/demo" class="bg-gray-100 text-gray-800 px-5 py-2.5 rounded-lg font-medium hover:bg-gray-200 transition">Live ML Demo</a>
-                    <a href="/contact" class="border border-gray-300 text-gray-700 px-5 py-2.5 rounded-lg font-medium hover:bg-gray-50 transition">Get in Touch</a>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Seeking</h3>
+                <p class="text-secondary">Virginia Tech Graduate Assistantship in IT Operations, Research Impact & Intelligence, or research labs.</p>
+            </div>
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Targeting</h3>
+                <p class="text-secondary">Data Scientist / ML Engineer / AI Engineer internships for Summer 2027.</p>
+            </div>
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Location</h3>
+                <p class="text-secondary">Relocating Ahmedabad → Blacksburg in August 2026. Open to remote and on-campus roles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What I Build -->
+    <section>
+        <h2 style="font-size: 1.875rem; margin-bottom: 1.5rem;">What I Build</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="surface">
+                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
+                    <span class="font-mono text-accent" style="font-size: 0.875rem;">01</span>
+                    <h3 style="font-size: 1.25rem;">Production LLM Systems</h3>
                 </div>
+                <p class="text-secondary">LLM-powered WhatsApp ordering platforms, Azure OpenAI integrations, and 24/7 automated conversational pipelines serving 1,500+ product catalogs.</p>
             </div>
-        </div>
-    </section>
-
-    <section class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl shadow-sm p-6">
-            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Currently Seeking</h3>
-            <p class="mt-2 text-xl font-semibold text-gray-900">Virginia Tech Graduate Assistantship</p>
-            <p class="mt-2 text-gray-600 text-sm">IT Operations, Research Impact & Intelligence, or any research lab needing data engineering and ML support.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm p-6">
-            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Also Targeting</h3>
-            <p class="mt-2 text-xl font-semibold text-gray-900">Data Scientist / ML Engineer / AI Engineer</p>
-            <p class="mt-2 text-gray-600 text-sm">Industry internships for Summer 2027, with moderate interest in quantitative finance.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm p-6">
-            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Location</h3>
-            <p class="mt-2 text-xl font-semibold text-gray-900">Ahmedabad → Blacksburg</p>
-            <p class="mt-2 text-gray-600 text-sm">Relocating to Virginia Tech in August 2026. Available for remote and on-campus opportunities.</p>
-        </div>
-    </section>
-
-    <section class="bg-white rounded-2xl shadow-sm p-8">
-        <h2 class="text-2xl font-bold text-gray-900">What I Build</h2>
-        <div class="mt-6 grid md:grid-cols-2 gap-6">
-            <div class="border border-gray-200 rounded-xl p-5">
-                <h3 class="font-semibold text-gray-900">Production LLM Systems</h3>
-                <p class="mt-2 text-gray-600 text-sm">LLM-powered WhatsApp ordering platforms, Azure OpenAI integrations, and 24/7 automated conversational pipelines.</p>
+            <div class="surface">
+                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
+                    <span class="font-mono text-accent" style="font-size: 0.875rem;">02</span>
+                    <h3 style="font-size: 1.25rem;">ML & Deep Learning</h3>
+                </div>
+                <p class="text-secondary">LSTM, Deep RL (PPO/DQN/SAC), time-series forecasting, backtesting, and reproducible research published at IEEE ICCICT 2026.</p>
             </div>
-            <div class="border border-gray-200 rounded-xl p-5">
-                <h3 class="font-semibold text-gray-900">ML & Deep Learning</h3>
-                <p class="mt-2 text-gray-600 text-sm">LSTM, Deep RL (PPO/DQN/SAC), time-series forecasting, backtesting, and reproducible research.</p>
+            <div class="surface">
+                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
+                    <span class="font-mono text-accent" style="font-size: 0.875rem;">03</span>
+                    <h3 style="font-size: 1.25rem;">Data Engineering</h3>
+                </div>
+                <p class="text-secondary">Snowflake pipelines, SQLite snapshot modes, ETL automation, and cost-optimized reporting that eliminated recurring cloud costs.</p>
             </div>
-            <div class="border border-gray-200 rounded-xl p-5">
-                <h3 class="font-semibold text-gray-900">Data Engineering</h3>
-                <p class="mt-2 text-gray-600 text-sm">Snowflake pipelines, SQLite snapshot modes, ETL automation, and cost-optimized reporting.</p>
-            </div>
-            <div class="border border-gray-200 rounded-xl p-5">
-                <h3 class="font-semibold text-gray-900">Full-Stack Deployment</h3>
-                <p class="mt-2 text-gray-600 text-sm">FastAPI backends, Azure App Service, Docker, GitHub Actions CI/CD, and automated testing.</p>
+            <div class="surface">
+                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
+                    <span class="font-mono text-accent" style="font-size: 0.875rem;">04</span>
+                    <h3 style="font-size: 1.25rem;">Full-Stack Deployment</h3>
+                </div>
+                <p class="text-secondary">FastAPI backends, Azure App Service, Docker, GitHub Actions CI/CD, and automated testing for production-grade systems.</p>
             </div>
         </div>
     </section>

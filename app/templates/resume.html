@@ -1,98 +1,104 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="space-y-8">
-    <div class="flex items-center justify-between">
+<div class="space-y-10">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Resume</h1>
-            <p class="mt-2 text-gray-600">Incoming M.S. Data Science student at Virginia Tech.</p>
+            <h1>Resume</h1>
+            <p class="text-secondary" style="margin-top: 0.5rem;">Incoming M.S. Data Science student at Virginia Tech.</p>
         </div>
-        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition" onclick="alert('PDF download would be implemented here'); return false;">Download PDF</a>
+        <a href="#" class="btn btn-primary" onclick="alert('PDF download would be implemented here'); return false;">Download PDF</a>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-sm p-8 space-y-8">
-        <section>
-            <h2 class="text-xl font-semibold text-gray-900 border-b pb-2">Education</h2>
-            <div class="mt-4 space-y-4">
-                <div class="flex justify-between">
-                    <div>
-                        <h3 class="font-semibold text-gray-900">Virginia Tech</h3>
-                        <p class="text-gray-600">M.S. in Data Science, Blacksburg, VA</p>
-                    </div>
-                    <p class="text-gray-500">Aug 2026 – May 2028</p>
-                </div>
-                <div class="flex justify-between">
-                    <div>
-                        <h3 class="font-semibold text-gray-900">SVKM's NMIMS University, MPSTME, Mumbai</h3>
-                        <p class="text-gray-600">B.Tech in Computer Engineering, GPA: 3.60/4.0</p>
-                    </div>
-                    <p class="text-gray-500">Graduated May 2026</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="text-xl font-semibold text-gray-900 border-b pb-2">Experience</h2>
-            <div class="mt-4 space-y-6">
+    <section class="surface">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Education</h2>
+        <div class="space-y-4">
+            <div class="flex flex-col md:flex-row md:justify-between gap-2">
                 <div>
-                    <div class="flex justify-between">
-                        <h3 class="font-semibold text-gray-900">Prowess Consulting — Data & AI Engineering Intern</h3>
-                        <p class="text-gray-500">Dec 2025 – Jun 2026</p>
-                    </div>
-                    <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                        <li>Owned end-to-end delivery of LLM-powered WhatsApp ordering platform on Azure App Service for pharmaceutical distribution.</li>
-                        <li>Integrated Azure OpenAI intent classification with 1,500+ product catalog and Snowflake-backed conversation logging.</li>
-                        <li>Built SalesVitals FastAPI analytics stack with SQLite snapshot mode, eliminating recurring Snowflake costs.</li>
-                        <li>Maintained reproducibility via Git/GitHub Actions and automated test suites.</li>
-                    </ul>
+                    <h3 style="font-size: 1.125rem;">Virginia Tech</h3>
+                    <p class="text-secondary">M.S. in Data Science, Blacksburg, VA</p>
                 </div>
-                <div>
-                    <div class="flex justify-between">
-                        <h3 class="font-semibold text-gray-900">Gram Panchayat, Maharashtra — Social Impact Data Analyst (Volunteer)</h3>
-                        <p class="text-gray-500">2024</p>
-                    </div>
-                    <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                        <li>Collected and analyzed community participation, sanitation, and education data for rural development.</li>
-                        <li>Tracked 500+ sapling plantations and evaluated sanitation and digital-literacy programs.</li>
-                        <li>Collaborated with local authorities to optimize resource allocation for old-age homes and orphanages.</li>
-                    </ul>
-                </div>
+                <p class="text-tertiary font-mono" style="font-size: 0.875rem;">Aug 2026 – May 2028</p>
             </div>
-        </section>
+            <div class="flex flex-col md:flex-row md:justify-between gap-2">
+                <div>
+                    <h3 style="font-size: 1.125rem;">SVKM's NMIMS University, MPSTME, Mumbai</h3>
+                    <p class="text-secondary">B.Tech in Computer Engineering, GPA: 3.60/4.0</p>
+                </div>
+                <p class="text-tertiary font-mono" style="font-size: 0.875rem;">Graduated May 2026</p>
+            </div>
+        </div>
+    </section>
 
-        <section>
-            <h2 class="text-xl font-semibold text-gray-900 border-b pb-2">Research</h2>
-            <div class="mt-4">
-                <h3 class="font-semibold text-gray-900">A Hybrid LSTM + Deep Reinforcement Learning Framework for Enterprise-Grade Decision Support and Automated Trading</h3>
-                <p class="text-gray-600">IEEE ICCICT 2026 (under publication)</p>
-                <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                    <li>Proposes hybrid LSTM–Deep RL framework separating forecasting from execution.</li>
-                    <li>Validated on NIFTY-50 backtests with Sharpe ratio ~1.8.</li>
-                    <li>Algorithms: LSTM, PPO, DQN, SAC.</li>
+    <section class="surface">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Experience</h2>
+        <div class="space-y-6">
+            <div>
+                <div class="flex flex-col md:flex-row md:justify-between gap-2" style="margin-bottom: 0.75rem;">
+                    <h3 style="font-size: 1.125rem;">Prowess Consulting — Data & AI Engineering Intern</h3>
+                    <p class="text-tertiary font-mono" style="font-size: 0.875rem;">Dec 2025 – Jun 2026</p>
+                </div>
+                <ul class="text-secondary" style="list-style: none; padding-left: 1rem;">
+                    <li style="margin-bottom: 0.5rem;">→ Owned end-to-end delivery of LLM-powered WhatsApp ordering platform on Azure App Service for pharmaceutical distribution.</li>
+                    <li style="margin-bottom: 0.5rem;">→ Integrated Azure OpenAI intent classification with 1,500+ product catalog and Snowflake-backed conversation logging.</li>
+                    <li style="margin-bottom: 0.5rem;">→ Built SalesVitals FastAPI analytics stack with SQLite snapshot mode, eliminating recurring Snowflake costs.</li>
+                    <li>→ Maintained reproducibility via Git/GitHub Actions and automated test suites.</li>
                 </ul>
             </div>
-        </section>
+            <div>
+                <div class="flex flex-col md:flex-row md:justify-between gap-2" style="margin-bottom: 0.75rem;">
+                    <h3 style="font-size: 1.125rem;">Gram Panchayat, Maharashtra — Social Impact Data Analyst (Volunteer)</h3>
+                    <p class="text-tertiary font-mono" style="font-size: 0.875rem;">2024</p>
+                </div>
+                <ul class="text-secondary" style="list-style: none; padding-left: 1rem;">
+                    <li style="margin-bottom: 0.5rem;">→ Collected and analyzed community participation, sanitation, and education data for rural development.</li>
+                    <li style="margin-bottom: 0.5rem;">→ Tracked 500+ sapling plantations and evaluated sanitation and digital-literacy programs.</li>
+                    <li>→ Collaborated with local authorities to optimize resource allocation for old-age homes and orphanages.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        <section>
-            <h2 class="text-xl font-semibold text-gray-900 border-b pb-2">Skills</h2>
-            <div class="mt-4 grid md:grid-cols-2 gap-4">
-                <div>
-                    <h3 class="font-semibold text-gray-900 text-sm uppercase tracking-wide">Programming</h3>
-                    <p class="mt-1 text-gray-600">Python, SQL, Java, C, C++, JavaScript, HTML/CSS</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 text-sm uppercase tracking-wide">Backend & Frameworks</h3>
-                    <p class="mt-1 text-gray-600">FastAPI, Spring Boot / Spring Cloud, REST API design</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 text-sm uppercase tracking-wide">Cloud & DevOps</h3>
-                    <p class="mt-1 text-gray-600">Microsoft Azure (App Service, OpenAI), Git/GitHub Actions, Docker, CI/CD</p>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-gray-900 text-sm uppercase tracking-wide">Data & ML</h3>
-                    <p class="mt-1 text-gray-600">Snowflake, SQLite, MongoDB, Power BI, LSTM, Deep RL, Scikit-learn, Pandas, NumPy</p>
+    <section class="surface">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Research</h2>
+        <div>
+            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">A Hybrid LSTM + Deep Reinforcement Learning Framework for Enterprise-Grade Decision Support and Automated Trading</h3>
+            <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 0.75rem;">IEEE ICCICT 2026 (under publication)</p>
+            <ul class="text-secondary" style="list-style: none; padding-left: 1rem;">
+                <li style="margin-bottom: 0.5rem;">→ Proposes hybrid LSTM–Deep RL framework separating forecasting from execution.</li>
+                <li style="margin-bottom: 0.5rem;">→ Validated on NIFTY-50 backtests with Sharpe ratio ~1.8.</li>
+                <li>→ Algorithms: LSTM, PPO, DQN, SAC.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="surface">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Skills</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Programming</h3>
+                <div class="flex flex-wrap" style="gap: 0.5rem;">
+                    <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">JavaScript</span>
                 </div>
             </div>
-        </section>
-    </div>
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Backend & Frameworks</h3>
+                <div class="flex flex-wrap" style="gap: 0.5rem;">
+                    <span class="tag">FastAPI</span><span class="tag">Spring Boot</span><span class="tag">Spring Cloud</span><span class="tag">REST API</span>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Cloud & DevOps</h3>
+                <div class="flex flex-wrap" style="gap: 0.5rem;">
+                    <span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Data & ML</h3>
+                <div class="flex flex-wrap" style="gap: 0.5rem;">
+                    <span class="tag">Snowflake</span><span class="tag">SQLite</span><span class="tag">LSTM</span><span class="tag">Deep RL</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock %}
