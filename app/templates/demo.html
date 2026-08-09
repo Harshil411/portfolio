@@ -111,19 +111,19 @@ document.getElementById('predict-form').addEventListener('submit', async (e) => 
     const contentDiv = document.getElementById('result-content');
 
     if (data.prediction === 1) {
-        contentDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-        contentDiv.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+        contentDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.08)';
+        contentDiv.style.border = '1px solid rgba(239, 68, 68, 0.25)';
         contentDiv.innerHTML = `
-            <p style="color: #ef4444; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Defect Likely</p>
-            <p style="color: #f87171; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability: ${(data.probability.defect * 100).toFixed(1)}%</p>
+            <p style="color: #dc2626; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Defect Likely</p>
+            <p style="color: #ef4444; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability: ${(data.probability.defect * 100).toFixed(1)}%</p>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">Recommendation: Inspect equipment and recalibrate sensors.</p>
         `;
     } else {
-        contentDiv.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
-        contentDiv.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+        contentDiv.style.backgroundColor = 'rgba(5, 150, 105, 0.08)';
+        contentDiv.style.border = '1px solid rgba(5, 150, 105, 0.25)';
         contentDiv.innerHTML = `
-            <p style="color: #10b981; font-weight: 600; margin-bottom: 0.5rem;">✅ No Defect Predicted</p>
-            <p style="color: #34d399; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability of defect: ${(data.probability.defect * 100).toFixed(1)}%</p>
+            <p style="color: #059669; font-weight: 600; margin-bottom: 0.5rem;">✅ No Defect Predicted</p>
+            <p style="color: #10b981; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability of defect: ${(data.probability.defect * 100).toFixed(1)}%</p>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">Recommendation: Continue normal operations.</p>
         `;
     }
