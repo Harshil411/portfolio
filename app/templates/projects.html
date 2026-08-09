@@ -1,125 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="space-y-8">
-    <div>
-        <h1>Projects</h1>
-        <p class="text-secondary" style="margin-top: 0.5rem;">Production systems, research, and deployed ML demos.</p>
-    </div>
+<div>
+    <header style="max-width: 48rem; margin-bottom: 3.5rem;">
+        <p class="eyebrow" style="margin-bottom: 0.75rem;">Project index / 2024–2026</p>
+        <h1 style="margin-bottom: 1rem;">Work that holds up under questions.</h1>
+        <p class="text-secondary">A concise record of deployed systems, research, and experiments. Each entry highlights the constraint, the technical decision, and the evidence available.</p>
+    </header>
 
-    <div class="space-y-6">
-        <article class="surface" style="transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div style="flex: 1;">
-                    <div class="flex items-center" style="gap: 1rem; margin-bottom: 0.75rem;">
-                        <span class="font-mono text-accent" style="font-size: 0.875rem;">01</span>
-                        <h2 style="font-size: 1.5rem;">Production LLM Platform</h2>
-                    </div>
-                    <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 1rem;">Prowess Consulting | Data & AI Engineering Intern</p>
-                    <p class="text-secondary">LLM-powered WhatsApp inquiry platform for 24/7 automated conversational ordering in pharmaceutical distribution. Built from scratch on Azure App Service with Azure OpenAI intent classification and Snowflake-backed logging.</p>
-                    <div class="flex flex-wrap" style="gap: 0.5rem; margin-top: 1rem;">
-                        <span class="tag">Azure App Service</span>
-                        <span class="tag">Azure OpenAI</span>
-                        <span class="tag">Snowflake</span>
-                        <span class="tag">GitHub Actions</span>
-                    </div>
-                </div>
-                <div class="text-right" style="min-width: 8rem;">
-                    <p class="font-mono text-accent" style="font-size: 1.5rem;">1,500+</p>
-                    <p class="text-tertiary" style="font-size: 0.875rem;">products</p>
-                </div>
+    <section>
+        <article class="case-study">
+            <div class="case-study-grid">
+                <div><p class="case-number" style="margin-bottom: 0.75rem;">01 / INDUSTRY</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Production LLM Platform</h2><p class="text-secondary">LLM-powered WhatsApp inquiry platform for pharmaceutical distribution, built from scratch with Azure OpenAI classification, Azure App Service deployment, and Snowflake-backed logging.</p><div class="architecture"><p class="architecture-title">Architecture</p><div class="pipeline"><span>WhatsApp</span><i>→</i><span>Azure OpenAI</span><i>→</i><span>Product catalog</span><i>→</i><span>Snowflake</span></div></div></div>
+                <aside><div class="case-metric"><strong>1,500+</strong><span class="case-meta">product catalog entries</span></div><p class="case-meta">Prowess Consulting · Data & AI Engineering Intern</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">Azure OpenAI</span><span class="tag">Snowflake</span><span class="tag">CI/CD</span></div></aside>
             </div>
         </article>
-
-        <article class="surface" style="transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div style="flex: 1;">
-                    <div class="flex items-center" style="gap: 1rem; margin-bottom: 0.75rem;">
-                        <span class="font-mono text-accent" style="font-size: 0.875rem;">02</span>
-                        <h2 style="font-size: 1.5rem;">SalesVitals</h2>
-                    </div>
-                    <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 1rem;">Prowess Consulting | Data & AI Engineering Intern</p>
-                    <p class="text-secondary">FastAPI analytics stack surfacing customer insights to pharmaceutical field reps. Designed custom SQLite snapshot mode with GitHub Actions LFS validation to eliminate recurring high-cost Snowflake queries.</p>
-                    <div class="flex flex-wrap" style="gap: 0.5rem; margin-top: 1rem;">
-                        <span class="tag">FastAPI</span>
-                        <span class="tag">SQLite</span>
-                        <span class="tag">Azure OpenAI</span>
-                        <span class="tag">GitHub Actions</span>
-                    </div>
-                </div>
-                <div class="text-right" style="min-width: 8rem;">
-                    <p class="font-mono text-accent" style="font-size: 1.5rem;">100%</p>
-                    <p class="text-tertiary" style="font-size: 0.875rem;">cost reduction</p>
-                </div>
+        <article class="case-study">
+            <div class="case-study-grid">
+                <div><p class="case-number" style="margin-bottom: 0.75rem;">02 / INDUSTRY</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">SalesVitals</h2><p class="text-secondary">FastAPI analytics stack delivering customer insights to pharmaceutical field representatives. A versioned SQLite snapshot strategy, validated in GitHub Actions, replaced recurring warehouse reads for the delivery use case.</p><div class="architecture"><p class="architecture-title">Delivery architecture</p><div class="pipeline"><span>Warehouse data</span><i>→</i><span>SQLite snapshot</span><i>→</i><span>FastAPI</span><i>→</i><span>Field team</span></div></div></div>
+                <aside><div class="case-metric"><strong>0</strong><span class="case-meta">recurring warehouse-query cost for snapshots</span></div><p class="case-meta">Prowess Consulting · Data & AI Engineering Intern</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">GitHub Actions</span></div></aside>
             </div>
         </article>
-
-        <article class="surface" style="transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div style="flex: 1;">
-                    <div class="flex items-center" style="gap: 1rem; margin-bottom: 0.75rem;">
-                        <span class="font-mono text-accent" style="font-size: 0.875rem;">03</span>
-                        <h2 style="font-size: 1.5rem;">Hybrid LSTM + Deep RL Trading</h2>
-                    </div>
-                    <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 1rem;">IEEE ICCICT 2026 Publication</p>
-                    <p class="text-secondary">Hybrid framework separating forecasting from execution using LSTM and Deep Reinforcement Learning (PPO, DQN, SAC). Validated on NIFTY-50 backtests with risk-adjusted metrics.</p>
-                    <div class="flex flex-wrap" style="gap: 0.5rem; margin-top: 1rem;">
-                        <span class="tag">LSTM</span>
-                        <span class="tag">PPO</span>
-                        <span class="tag">DQN</span>
-                        <span class="tag">SAC</span>
-                    </div>
-                </div>
-                <div class="text-right" style="min-width: 8rem;">
-                    <p class="font-mono text-accent" style="font-size: 1.5rem;">~1.8</p>
-                    <p class="text-tertiary" style="font-size: 0.875rem;">Sharpe ratio</p>
-                </div>
+        <article class="case-study">
+            <div class="case-study-grid">
+                <div><p class="case-number" style="margin-bottom: 0.75rem;">03 / RESEARCH</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Hybrid LSTM + Deep RL Trading</h2><p class="text-secondary">A framework that separates forecasting from execution, combining LSTM models with PPO, DQN, and SAC agents. Evaluated using risk-adjusted NIFTY-50 backtests.</p></div>
+                <aside><div class="case-metric"><strong>~1.8</strong><span class="case-meta">reported Sharpe ratio</span></div><p class="case-meta">IEEE ICCICT 2026 · under publication</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">LSTM</span><span class="tag">PPO</span><span class="tag">DQN</span><span class="tag">SAC</span></div></aside>
             </div>
         </article>
-
-        <article class="surface" style="border-color: var(--accent); transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent-hover)'" onmouseout="this.style.borderColor='var(--accent)'">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div style="flex: 1;">
-                    <div class="flex items-center" style="gap: 1rem; margin-bottom: 0.75rem;">
-                        <span class="font-mono text-accent" style="font-size: 0.875rem;">04</span>
-                        <h2 style="font-size: 1.5rem;">Manufacturing Defect Prediction <span class="tag" style="background-color: var(--accent); color: var(--bg-primary); border-color: var(--accent);">Live</span></h2>
-                    </div>
-                    <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 1rem;">Portfolio ML Demo</p>
-                    <p class="text-secondary">Random Forest classifier deployed as a FastAPI microservice with Docker and CI/CD. Try the live prediction endpoint with real-time sensor inputs.</p>
-                    <div class="flex flex-wrap" style="gap: 0.5rem; margin-top: 1rem;">
-                        <span class="tag">FastAPI</span>
-                        <span class="tag">Scikit-learn</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">Azure</span>
-                    </div>
-                </div>
-                <div class="text-right" style="min-width: 8rem;">
-                    <p class="font-mono text-accent" style="font-size: 1.5rem;">88.1%</p>
-                    <p class="text-tertiary" style="font-size: 0.875rem;">accuracy</p>
-                </div>
-            </div>
-            <div style="margin-top: 1.5rem;">
-                <a href="/demo" class="btn btn-primary">Try the live demo</a>
+        <article class="case-study">
+            <div class="case-study-grid">
+                <div><p class="case-number" style="margin-bottom: 0.75rem;">04 / DEPLOYED EXPERIMENT</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Manufacturing Defect Prediction</h2><p class="text-secondary">A Random Forest classifier served through FastAPI to demonstrate the full path from a trained model to an inspectable prediction interface. The training data is synthetic by design.</p></div>
+                <aside><a href="/demo" class="btn btn-primary">Inspect the demo →</a><p class="case-meta" style="margin-top: 1rem;">Synthetic data · deployment and evaluation exercise</p></aside>
             </div>
         </article>
-
-        <article class="surface" style="transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div style="flex: 1;">
-                    <div class="flex items-center" style="gap: 1rem; margin-bottom: 0.75rem;">
-                        <span class="font-mono text-accent" style="font-size: 0.875rem;">05</span>
-                        <h2 style="font-size: 1.5rem;">Distributed Food Delivery App</h2>
-                    </div>
-                    <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 1rem;">Academic Project</p>
-                    <p class="text-secondary">Java Spring Boot microservices with API Gateway, Eureka, JWT authentication, circuit breakers, and centralized monitoring.</p>
-                    <div class="flex flex-wrap" style="gap: 0.5rem; margin-top: 1rem;">
-                        <span class="tag">Spring Boot</span>
-                        <span class="tag">Microservices</span>
-                        <span class="tag">Java</span>
-                        <span class="tag">JWT</span>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
+    </section>
 </div>
 {% endblock %}

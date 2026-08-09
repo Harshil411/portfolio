@@ -2,16 +2,22 @@
 {% block content %}
 <div class="space-y-8">
     <div>
+        <p class="eyebrow" style="margin-bottom: 0.75rem;">Deployed experiment / model serving</p>
         <h1>Live ML Demo</h1>
-        <p class="text-secondary" style="margin-top: 0.5rem;">Manufacturing Defect Prediction — Random Forest classifier served as a FastAPI microservice.</p>
+        <p class="text-secondary" style="margin-top: 0.5rem;">Manufacturing Defect Prediction — an inspectable Random Forest classifier served as a FastAPI microservice.</p>
     </div>
+
+    <aside class="note" aria-label="Demo dataset note">
+        <strong>About this demonstration.</strong> The model is trained on synthetic manufacturing sensor data. It demonstrates serving, interface design, and evaluation communication—not a production safety system or a claim about real-world defect rates.
+    </aside>
 
     {% if model_meta %}
     <section class="surface">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Model Performance</h2>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Evaluation snapshot</h2>
+        <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: 1.5rem;">Held-out test-set metrics from this synthetic-data experiment.</p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div style="background-color: var(--bg-tertiary); border-radius: var(--radius); padding: 1.5rem; text-align: center;">
-                <p class="text-tertiary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Test Accuracy</p>
+                <p class="text-tertiary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Test accuracy</p>
                 <p class="font-mono text-accent" style="font-size: 2rem;">{{ model_meta.accuracy }}</p>
             </div>
             <div style="background-color: var(--bg-tertiary); border-radius: var(--radius); padding: 1.5rem; text-align: center;">
@@ -80,6 +86,21 @@
     </section>
 
     <section class="surface">
+        <p class="eyebrow" style="margin-bottom: 0.75rem;">Interpretation</p>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">What this result can—and cannot—tell us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Useful here</h3>
+                <p class="text-secondary" style="font-size: 0.875rem;">The interface exposes model inputs, response probabilities, and feature importances so the prediction path is visible rather than treated as a black box.</p>
+            </div>
+            <div>
+                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--signal);">Not a deployment claim</h3>
+                <p class="text-secondary" style="font-size: 0.875rem;">Synthetic data cannot establish field performance. A real deployment would require representative labels, calibration, threshold selection, drift monitoring, and human review.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="surface">
         <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Technical Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -116,7 +137,7 @@ document.getElementById('predict-form').addEventListener('submit', async (e) => 
         contentDiv.innerHTML = `
             <p style="color: #dc2626; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Defect Likely</p>
             <p style="color: #ef4444; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability: ${(data.probability.defect * 100).toFixed(1)}%</p>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Recommendation: Inspect equipment and recalibrate sensors.</p>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: inspect the equipment and sensor readings.</p>
         `;
     } else {
         contentDiv.style.backgroundColor = 'rgba(5, 150, 105, 0.08)';
@@ -124,7 +145,7 @@ document.getElementById('predict-form').addEventListener('submit', async (e) => 
         contentDiv.innerHTML = `
             <p style="color: #059669; font-weight: 600; margin-bottom: 0.5rem;">✅ No Defect Predicted</p>
             <p style="color: #10b981; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability of defect: ${(data.probability.defect * 100).toFixed(1)}%</p>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Recommendation: Continue normal operations.</p>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: review alongside normal operating checks.</p>
         `;
     }
     resultDiv.classList.remove('hidden');

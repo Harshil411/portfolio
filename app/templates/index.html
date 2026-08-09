@@ -1,78 +1,78 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-    <!-- Hero -->
-    <section>
-        <div style="max-width: 48rem;">
-            <p class="font-mono text-accent" style="font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;">
-                Incoming M.S. Data Science @ Virginia Tech
-            </p>
-            <h1 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem;">
-                Harshil Agrawal
-            </h1>
-            <p class="text-secondary" style="font-size: 1.25rem; line-height: 1.6; max-width: 36rem;">
-                Data & AI Engineer who ships production systems. Built LLM-powered platforms, FastAPI analytics stacks, and published IEEE research on Deep Reinforcement Learning.
-            </p>
-            <div class="flex flex-wrap" style="gap: 1rem; margin-top: 2rem;">
-                <a href="/projects" class="btn btn-primary">View Projects</a>
-                <a href="/demo" class="btn btn-secondary">Live ML Demo</a>
-                <a href="/contact" class="btn btn-outline">Get in Touch</a>
+    <section class="hero">
+        <div>
+            <p class="eyebrow" style="margin-bottom: 1rem;">Data systems · applied ML · research</p>
+            <h1 class="hero-title" style="margin-bottom: 1.5rem;">Harshil Agrawal</h1>
+            <p class="hero-summary text-secondary">I build data and AI systems that make it from an ambiguous business problem to a deployed, testable product—then examine how they behave in the real world.</p>
+            <div class="flex flex-wrap" style="gap: 0.75rem; margin-top: 2rem;">
+                <a href="/projects" class="btn btn-primary">Read selected work <span aria-hidden="true">→</span></a>
+                <a href="/demo" class="btn btn-outline">Inspect ML demo</a>
             </div>
         </div>
+        <aside class="signal-panel" aria-label="Current availability">
+            <p class="eyebrow" style="margin-bottom: 0.5rem;">Now / 2026–27</p>
+            <div class="signal-row"><span>Graduate study</span><span>MS Data Science<br>Virginia Tech</span></div>
+            <div class="signal-row"><span>Seeking</span><span>GA roles · research<br>ML / DS internships</span></div>
+            <div class="signal-row"><span>Relocating</span><span>Blacksburg, VA<br>Aug 2026</span></div>
+        </aside>
     </section>
 
-    <!-- Current Focus -->
-    <section class="accent-border" style="margin-top: 4rem;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Current Focus</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section style="margin-top: 4.5rem;">
+        <div class="section-heading">
             <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Seeking</h3>
-                <p class="text-secondary">Virginia Tech Graduate Assistantship in IT Operations, Research Impact & Intelligence, or research labs.</p>
+                <p class="eyebrow" style="margin-bottom: 0.5rem;">Selected work</p>
+                <h2>Systems with an evidence trail.</h2>
             </div>
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Targeting</h3>
-                <p class="text-secondary">Data Scientist / ML Engineer / AI Engineer internships for Summer 2027.</p>
-            </div>
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Location</h3>
-                <p class="text-secondary">Relocating Ahmedabad → Blacksburg in August 2026. Open to remote and on-campus roles.</p>
-            </div>
+            <a href="/projects" class="text-accent font-mono" style="font-size: 0.8rem; text-decoration: none;">ALL PROJECTS →</a>
         </div>
+
+        <article class="case-study">
+            <div class="case-study-grid">
+                <div>
+                    <p class="case-number" style="margin-bottom: 0.75rem;">01 / PRODUCTION LLM PLATFORM</p>
+                    <h3 style="font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 0.9rem;">Conversational ordering for pharmaceutical distribution.</h3>
+                    <p class="text-secondary">Owned the build of a WhatsApp inquiry platform that pairs Azure OpenAI intent classification with a Snowflake-backed product and conversation layer—designed for always-on ordering workflows.</p>
+                    <div class="architecture">
+                        <p class="architecture-title">System trace</p>
+                        <div class="pipeline"><span>WhatsApp inquiry</span><i>→</i><span>Intent classification</span><i>→</i><span>Product context</span><i>→</i><span>Snowflake logs</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="case-metric"><strong>1,500+</strong><span class="case-meta">product catalog entries in scope</span></div>
+                    <p class="case-meta" style="margin-bottom: 0.75rem;">ROLE</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Data & AI Engineering Intern<br>Prowess Consulting</p>
+                    <div class="flex flex-wrap" style="gap: 0.4rem;"><span class="tag">Azure OpenAI</span><span class="tag">Snowflake</span><span class="tag">Azure App Service</span></div>
+                </div>
+            </div>
+        </article>
+
+        <article class="case-study">
+            <div class="case-study-grid">
+                <div>
+                    <p class="case-number" style="margin-bottom: 0.75rem;">02 / SALESVITALS</p>
+                    <h3 style="font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 0.9rem;">An analytics stack designed around operational constraints.</h3>
+                    <p class="text-secondary">Built a FastAPI data product for pharmaceutical field representatives, then introduced a SQLite snapshot mode and GitHub Actions validation so insight delivery did not depend on recurring warehouse queries.</p>
+                    <div class="architecture">
+                        <p class="architecture-title">Delivery path</p>
+                        <div class="pipeline"><span>Source data</span><i>→</i><span>Versioned snapshot</span><i>→</i><span>FastAPI</span><i>→</i><span>Field insight</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="case-metric"><strong>0</strong><span class="case-meta">recurring Snowflake query cost for snapshot delivery</span></div>
+                    <p class="case-meta" style="margin-bottom: 0.75rem;">FOCUS</p>
+                    <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Reproducibility, data access, and deployment discipline.</p>
+                    <div class="flex flex-wrap" style="gap: 0.4rem;"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">GitHub Actions</span></div>
+                </div>
+            </div>
+        </article>
     </section>
 
-    <!-- What I Build -->
-    <section style="margin-top: 4rem;">
-        <h2 style="font-size: 1.875rem; margin-bottom: 1.5rem;">What I Build</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="surface">
-                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
-                    <span class="font-mono text-accent" style="font-size: 0.875rem;">01</span>
-                    <h3 style="font-size: 1.25rem;">Production LLM Systems</h3>
-                </div>
-                <p class="text-secondary">LLM-powered WhatsApp ordering platforms, Azure OpenAI integrations, and 24/7 automated conversational pipelines serving 1,500+ product catalogs.</p>
-            </div>
-            <div class="surface">
-                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
-                    <span class="font-mono text-accent" style="font-size: 0.875rem;">02</span>
-                    <h3 style="font-size: 1.25rem;">ML & Deep Learning</h3>
-                </div>
-                <p class="text-secondary">LSTM, Deep RL (PPO/DQN/SAC), time-series forecasting, backtesting, and reproducible research published at IEEE ICCICT 2026.</p>
-            </div>
-            <div class="surface">
-                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
-                    <span class="font-mono text-accent" style="font-size: 0.875rem;">03</span>
-                    <h3 style="font-size: 1.25rem;">Data Engineering</h3>
-                </div>
-                <p class="text-secondary">Snowflake pipelines, SQLite snapshot modes, ETL automation, and cost-optimized reporting that eliminated recurring cloud costs.</p>
-            </div>
-            <div class="surface">
-                <div class="flex items-center" style="gap: 0.75rem; margin-bottom: 1rem;">
-                    <span class="font-mono text-accent" style="font-size: 0.875rem;">04</span>
-                    <h3 style="font-size: 1.25rem;">Full-Stack Deployment</h3>
-                </div>
-                <p class="text-secondary">FastAPI backends, Azure App Service, Docker, GitHub Actions CI/CD, and automated testing for production-grade systems.</p>
-            </div>
-        </div>
+    <section class="accent-border" style="margin-top: 3rem;">
+        <p class="eyebrow" style="margin-bottom: 0.5rem;">Research direction</p>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Forecasting, decision-making, and evaluation under uncertainty.</h2>
+        <p class="text-secondary" style="max-width: 45rem;">My current research explores a hybrid LSTM + Deep RL framework for decision support and automated trading, evaluated on NIFTY-50 backtests. The IEEE ICCICT 2026 paper is under publication.</p>
     </section>
 </div>
 {% endblock %}
