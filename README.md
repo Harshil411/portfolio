@@ -66,7 +66,7 @@ Open http://localhost:8000
 
 4. Confirm the service is running at `http://YOUR_VM_IP/health`.
 
-The included `compose.yaml` restarts the portfolio after a VM reboot. Keep the VM in the listed US regions and within the e2-micro/disk/egress free-tier limits. Add a domain and HTTPS only when needed.
+The included `compose.yaml` restarts the portfolio after a VM reboot and serves HTTPS automatically when the configured hostname resolves to the VM. Keep the VM in the listed US regions and within the e2-micro/disk/egress free-tier limits.
 
 ### Render
 

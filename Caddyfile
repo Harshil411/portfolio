@@ -1,0 +1,3 @@
+harshil-portfolio.duckdns.org {
+    reverse_proxy portfolio:8000
+}
