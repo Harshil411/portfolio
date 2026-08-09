@@ -6,7 +6,6 @@ import numpy as np
 from pathlib import Path
 import json
 
-import jinja2
 from starlette.templating import Jinja2Templates
 
 app = FastAPI(title="Harshil Agrawal Portfolio", version="1.0.0")
@@ -14,13 +13,7 @@ app = FastAPI(title="Harshil Agrawal Portfolio", version="1.0.0")
 BASE_DIR = Path(__file__).resolve().parent
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
-# Custom Jinja2 environment with cache disabled (Python 3.14 workaround)
-env = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(BASE_DIR / "templates"),
-    autoescape=jinja2.select_autoescape(),
-    cache_size=0
-)
-templates = Jinja2Templates(env=env)
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # Load model
 model_path = BASE_DIR.parent / "ml" / "model.joblib"
@@ -33,27 +26,30 @@ if model_path.exists():
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse(request, "index.html", {"title": "Home"})
+    return templates.TemplateResponse("index.html", {"request": request, "title": "Home"})
 
 @app.get("/projects", response_class=HTMLResponse)
 async def projects(request: Request):
-    return templates.TemplateResponse(request, "projects.html", {"title": "Projects"})
+    return templates.TemplateResponse("projects.html", {"request": request, "title": "Projects"})
 
 @app.get("/resume", response_class=HTMLResponse)
 async def resume(request: Request):
-    return templates.TemplateResponse(request, "resume.html", {"title": "Resume"})
+    return templates.TemplateResponse("resume.html", {"request": request, "title": "Resume"})
 
 @app.get("/blog", response_class=HTMLResponse)
 async def blog(request: Request):
-    return templates.TemplateResponse(request, "blog.html", {"title": "Blog"})
+    return templates.TemplateResponse("blog.html", {"request": request, "title": "Blog"})
 
 @app.get("/contact", response_class=HTMLResponse)
 async def contact(request: Request):
-    return templates.TemplateResponse(request, "contact.html", {"title": "Contact"})
+    return templates.TemplateResponse("contact.html", {"request": request, "title": "Contact"})
 
 @app.get("/demo", response_class=HTMLResponse)
 async def demo(request: Request):
-    return templates.TemplateResponse(request, "demo.html", {"title": "ML Demo", "model_meta": model_meta})
+    return templates.TemplateResponse(
+        "demo.html",
+        {"request": request, "title": "ML Demo", "model_meta": model_meta}
+    )
 
 @app.post("/predict")
 async def predict(
