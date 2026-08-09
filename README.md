@@ -6,14 +6,14 @@ A minimal FastAPI portfolio website with a deployed Random Forest microservice. 
 
 - **Portfolio pages** — Home, Projects, Resume, Blog, Contact
 - **Live ML Demo** — Manufacturing Defect Prediction (Random Forest) via `/predict`
-- **Production patterns** — FastAPI, Docker, and Render deployment
+- **Production patterns** — FastAPI, Docker, and Google Cloud deployment
 
 ## Stack
 
 - FastAPI + Jinja2
 - scikit-learn Random Forest
 - Docker
-- Render Web Service
+- Google Compute Engine (Always Free)
 
 ## Quick Start
 
@@ -45,13 +45,32 @@ Open http://localhost:8000
 
 ## Deployment
 
-1. Create a Render Web Service using this repository and the Docker runtime.
-2. Select the `main` branch and set the health-check path to `/health`.
-3. Render automatically redeploys when changes are pushed to `main`.
+### Google Cloud Always Free
 
-## Free Resource Notes
+1. Create an Ubuntu **e2-micro** VM in `us-west1`, `us-central1`, or `us-east1`, and allow inbound HTTP traffic.
+2. SSH to the VM, then install Docker, Docker Compose, and Git:
 
-- Render's free service tier spins down after inactivity, so the first request after idle time can take longer.
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y docker.io docker-compose-v2 git
+   sudo systemctl enable --now docker
+   ```
+
+3. Clone this repository and start the app:
+
+   ```bash
+   git clone https://github.com/Harshil411/portfolio.git
+   cd portfolio
+   sudo docker compose up -d --build
+   ```
+
+4. Confirm the service is running at `http://YOUR_VM_IP/health`.
+
+The included `compose.yaml` restarts the portfolio after a VM reboot. Keep the VM in the listed US regions and within the e2-micro/disk/egress free-tier limits. Add a domain and HTTPS only when needed.
+
+### Render
+
+Render remains available for simple managed deployments, but its free service tier spins down after inactivity.
 
 ## Model
 
