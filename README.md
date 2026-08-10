@@ -79,12 +79,13 @@ One-time setup:
    ```bash
    ssh-keygen -t ed25519 -f ~/.ssh/github_actions_portfolio -N ""
    cat ~/.ssh/github_actions_portfolio.pub >> ~/.ssh/authorized_keys
+   base64 -w 0 ~/.ssh/github_actions_portfolio
    ssh-keyscan -H YOUR_VM_IP
    ```
 
 2. In GitHub: **Settings → Secrets and variables → Actions**, add these repository secrets:
 
-   - `GCP_SSH_PRIVATE_KEY`: contents of `~/.ssh/github_actions_portfolio`
+   - `GCP_SSH_PRIVATE_KEY`: the one-line Base64 output from `base64 -w 0 ~/.ssh/github_actions_portfolio`
    - `GCP_SSH_KNOWN_HOSTS`: output from `ssh-keyscan -H YOUR_VM_IP`
 
 3. In the same page, add these repository variables:

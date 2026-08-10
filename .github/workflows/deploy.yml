@@ -3,6 +3,7 @@ name: Deploy portfolio
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -19,11 +20,11 @@ jobs:
     steps:
       - name: Configure SSH
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY_B64: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.GCP_SSH_KNOWN_HOSTS }}
         run: |
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          printf '%s' "$SSH_PRIVATE_KEY_B64" | base64 --decode > ~/.ssh/id_ed25519
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
 
@@ -37,5 +38,5 @@ jobs:
             cd ~/portfolio
             git pull --ff-only origin main
             sudo docker compose up -d --build
-            curl --fail --retry 15 --retry-delay 2 http://localhost/health
+            curl --fail --retry 15 --retry-delay 2 https://harshil-portfolio.duckdns.org/health | grep -q '"status":"healthy"'
           '
