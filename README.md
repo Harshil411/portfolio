@@ -68,6 +68,32 @@ Open http://localhost:8000
 
 The included `compose.yaml` restarts the portfolio after a VM reboot and serves HTTPS automatically when the configured hostname resolves to the VM. Keep the VM in the listed US regions and within the e2-micro/disk/egress free-tier limits.
 
+### Automatic deployments from GitHub
+
+`.github/workflows/deploy.yml` updates the VM whenever a commit reaches `main`. It uses a dedicated SSH key instead of granting GitHub Actions broad Google Cloud permissions.
+
+One-time setup:
+
+1. On the VM, create a deploy key and authorize its public half for the VM user that owns `~/portfolio`:
+
+   ```bash
+   ssh-keygen -t ed25519 -f ~/.ssh/github_actions_portfolio -N ""
+   cat ~/.ssh/github_actions_portfolio.pub >> ~/.ssh/authorized_keys
+   ssh-keyscan -H YOUR_VM_IP
+   ```
+
+2. In GitHub: **Settings → Secrets and variables → Actions**, add these repository secrets:
+
+   - `GCP_SSH_PRIVATE_KEY`: contents of `~/.ssh/github_actions_portfolio`
+   - `GCP_SSH_KNOWN_HOSTS`: output from `ssh-keyscan -H YOUR_VM_IP`
+
+3. In the same page, add these repository variables:
+
+   - `GCP_SSH_HOST`: the VM external IP or hostname
+   - `GCP_SSH_USER`: the Linux account that owns `~/portfolio`
+
+Keep the SSH private key only in GitHub Secrets; do not commit it. The workflow verifies the local `/health` endpoint after each deployment. If the VM's ephemeral IP changes, update both the DuckDNS record and `GCP_SSH_HOST`.
+
 ### Render
 
 Render remains available for simple managed deployments, but its free service tier spins down after inactivity.
