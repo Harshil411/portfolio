@@ -93,6 +93,12 @@ async def api_projects():
             "highlights": ["Eliminated recurring Snowflake costs", "Data-grounded talking scripts", "LFS validation"]
         },
         {
+            "name": "Banking PII Protection",
+            "description": "Local-first PII extraction and anonymization for sensitive banking text",
+            "tech": ["FastAPI", "React", "Hugging Face", "Python"],
+            "highlights": ["Multilingual transformer inference", "Schema-based entity validation", "Reported micro-F1: 0.84"]
+        },
+        {
             "name": "DRL Trading System",
             "description": "LSTM + Deep Reinforcement Learning for automated trading",
             "tech": ["LSTM", "PPO", "DQN", "SAC", "Python"],
