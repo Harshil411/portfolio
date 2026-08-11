@@ -4,9 +4,9 @@ A minimal FastAPI portfolio website with a deployed Random Forest microservice. 
 
 ## Features
 
-- **Portfolio pages** — Home, Projects, Resume, Blog, Contact
-- **Live ML Demo** — Manufacturing Defect Prediction (Random Forest) via `/predict`
-- **Production patterns** — FastAPI, Docker, and Google Cloud deployment
+- **Portfolio pages:** Home, Projects, Resume, and Contact
+- **Live ML Demo:** Manufacturing Defect Prediction (Random Forest) via `/predict`
+- **Production patterns:** FastAPI, Docker, and Google Cloud deployment
 
 ## Stack
 
@@ -106,6 +106,5 @@ Random Forest trained on 5,000 synthetic manufacturing sensor samples. Features:
 ## Next Steps
 
 - Add blog post engine (Markdown-based)
-- Add actual resume PDF download
 - Add privacy-conscious analytics
 - Add custom domain

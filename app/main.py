@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, Form, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 import joblib
 import numpy as np
@@ -36,9 +36,9 @@ async def projects(request: Request):
 async def resume(request: Request):
     return templates.TemplateResponse("resume.html", {"request": request, "title": "Resume"})
 
-@app.get("/blog", response_class=HTMLResponse)
-async def blog(request: Request):
-    return templates.TemplateResponse("blog.html", {"request": request, "title": "Blog"})
+@app.get("/blog", include_in_schema=False)
+async def blog():
+    return RedirectResponse("/projects", status_code=307)
 
 @app.get("/contact", response_class=HTMLResponse)
 async def contact(request: Request):

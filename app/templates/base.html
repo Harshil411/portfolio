@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harshil Agrawal builds data and AI systems, with selected work in applied machine learning, data products, and research.">
+    <meta name="theme-color" content="#faf9f7">
     <title>{{ title }} | Harshil Agrawal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +42,25 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .skip-link {
+            background: var(--text-primary);
+            color: white;
+            left: 1rem;
+            padding: 0.65rem 0.9rem;
+            position: fixed;
+            text-decoration: none;
+            top: 1rem;
+            transform: translateY(-200%);
+            z-index: 100;
+        }
+
+        .skip-link:focus { transform: translateY(0); }
 
         ::selection { background: #cce8db; }
 
@@ -226,6 +247,7 @@
         .hero-title { font-size: clamp(2.7rem, 7vw, 5.5rem); max-width: 12ch; }
         .hero-summary { font-size: 1.2rem; line-height: 1.65; max-width: 39rem; }
         .signal-panel { border-top: 2px solid var(--text-primary); padding-top: 1rem; }
+        .signal-index { color: var(--accent); font: 500 0.7rem var(--font-mono); letter-spacing: 0.12em; margin-bottom: 1rem; text-transform: uppercase; }
         .signal-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
         .signal-row span:last-child { font-family: var(--font-mono); font-size: 0.75rem; text-align: right; }
 
@@ -233,6 +255,22 @@
         .section-heading h2 { font-size: clamp(1.7rem, 3vw, 2.25rem); }
         .case-study { border-top: 2px solid var(--text-primary); padding: 1.5rem 0 2.25rem; }
         .case-study + .case-study { margin-top: 1rem; }
+        .case-study-featured { background: #073b32; border: 0; color: #eff8f3; margin-left: -1.5rem; margin-right: -1.5rem; padding: 2.5rem 1.5rem 2.75rem; position: relative; }
+        .case-study-featured::before { background: #78d4ae; content: ''; height: 4px; left: 0; position: absolute; top: 0; width: 7rem; }
+        .case-study-featured .case-study-grid { gap: 3.5rem; }
+        .case-study-featured h3 { color: white; }
+        .case-study-featured .text-secondary { color: #cfddd6; }
+        .case-study-featured .case-number, .case-study-featured .case-status { color: #9de6c4; }
+        .case-study-featured .case-metric { border-color: #78d4ae; }
+        .case-study-featured .case-metric strong { color: #b5f1d3; }
+        .case-study-featured .case-meta, .case-study-featured .evidence { color: #cfddd6; }
+        .case-study-featured .tag { background: transparent; border-color: rgba(239, 248, 243, 0.32); color: #eff8f3; }
+        .case-study-featured .architecture { background: rgba(255, 255, 255, 0.06); border-color: rgba(239, 248, 243, 0.2); }
+        .case-study-featured .architecture-title { color: #b7cbc1; }
+        .case-study-featured .pipeline span { background: rgba(255, 255, 255, 0.08); border-color: rgba(239, 248, 243, 0.26); color: #eff8f3; }
+        .case-study-featured .pipeline i { color: #9de6c4; }
+        .featured-aside { border-left: 1px solid rgba(239, 248, 243, 0.2); padding-left: 2rem; }
+        .featured-label { color: #9de6c4; font: 500 0.7rem var(--font-mono); letter-spacing: 0.14em; margin-bottom: 0.85rem; text-transform: uppercase; }
         .case-study-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(16rem, 0.75fr); gap: 3rem; }
         .case-number { color: var(--accent); font: 500 0.8rem var(--font-mono); letter-spacing: 0.08em; }
         .case-metric { border-left: 2px solid var(--accent); padding-left: 1rem; margin-bottom: 1.25rem; }
@@ -246,6 +284,17 @@
         .pipeline i { color: var(--accent); font-style: normal; }
 
         .note { border-left: 2px solid var(--signal); background: #fff8f2; padding: 1rem 1.25rem; color: #7c2d12; font-size: 0.875rem; }
+        .case-status { color: var(--accent); font: 500 0.7rem var(--font-mono); letter-spacing: 0.08em; margin-top: 1.25rem; text-transform: uppercase; }
+        .evidence { border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.82rem; margin-top: 0.5rem; padding-top: 0.85rem; }
+        .project-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr); gap: 3rem; margin-bottom: 3.5rem; }
+        .project-header > div { max-width: 48rem; }
+        .project-note { border-top: 2px solid var(--accent); color: var(--text-secondary); font-size: 0.9rem; padding-top: 1rem; }
+        .project-note strong { color: var(--text-primary); display: block; font: 500 0.72rem var(--font-mono); letter-spacing: 0.08em; margin-bottom: 0.45rem; text-transform: uppercase; }
+        .case-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+        .case-links .btn { padding: 0.6rem 0.9rem; }
+
+        .record-section { border-top: 2px solid var(--text-primary); padding: 1.75rem 0 2.25rem; }
+        .contact-panel { border-top: 2px solid var(--text-primary); padding: 1.75rem 0; }
 
         /* Accent border */
         .accent-border {
@@ -381,6 +430,9 @@
             .nav-links a::after { display: none; }
             .hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 1rem; }
             .case-study-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .case-study-featured { margin-left: 0; margin-right: 0; padding: 2rem 1.25rem; }
+            .featured-aside { border-left: 0; border-top: 1px solid rgba(239, 248, 243, 0.2); padding-left: 0; padding-top: 1.5rem; }
+            .project-header { grid-template-columns: 1fr; gap: 1.5rem; }
             .section-heading { align-items: flex-start; flex-direction: column; }
             h1 { font-size: 2.25rem; }
             h2 { font-size: 1.5rem; }
@@ -389,21 +441,22 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <nav>
         <div class="container">
             <a href="/" class="nav-brand">Harshil Agrawal</a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
             <ul class="nav-links" id="primary-navigation">
-                <li><a href="/">Home</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/demo">ML Demo</a></li>
-                <li><a href="/resume">Resume</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/"{% if request.url.path == '/' %} aria-current="page"{% endif %}>Home</a></li>
+                <li><a href="/projects"{% if request.url.path == '/projects' %} aria-current="page"{% endif %}>Projects</a></li>
+                <li><a href="/demo"{% if request.url.path == '/demo' %} aria-current="page"{% endif %}>ML Demo</a></li>
+                <li><a href="/resume"{% if request.url.path == '/resume' %} aria-current="page"{% endif %}>Resume</a></li>
+                <li><a href="/contact"{% if request.url.path == '/contact' %} aria-current="page"{% endif %}>Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
         <div class="container">
             {% block content %}{% endblock %}
         </div>
@@ -413,7 +466,8 @@
         <div class="container">
             <p>&copy; 2026 Harshil Agrawal. Built with FastAPI.</p>
             <div class="social-links">
-                <a href="https://github.com/Harshil411" target="_blank">GitHub</a>
+                <a href="https://github.com/Harshil411" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/harshil-agrawal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="mailto:harshilsagrawal@gmail.com">Email</a>
             </div>
         </div>

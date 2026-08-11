@@ -1,41 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-    <header style="max-width: 48rem; margin-bottom: 3.5rem;">
-        <p class="eyebrow" style="margin-bottom: 0.75rem;">Project index / 2024–2026</p>
-        <h1 style="margin-bottom: 1rem;">Work that holds up under questions.</h1>
-        <p class="text-secondary">A concise record of deployed systems, research, and experiments. Each entry highlights the constraint, the technical decision, and the evidence available.</p>
+    <header class="project-header">
+        <div>
+            <p class="eyebrow" style="margin-bottom: 0.75rem;">Project index / 2024 to 2026</p>
+            <h1 style="margin-bottom: 1rem;">Work that holds up under questions.</h1>
+            <p class="text-secondary">A record of employer-owned systems, open-source work, research, and deployed experiments. Each entry states what can be inspected here or followed to a public artifact.</p>
+        </div>
+        <aside class="project-note">
+            <strong>Reading the record</strong>
+            Employer-owned work documents the problem, decisions, and scope at a high level. Public projects link directly to the repository or live system.
+        </aside>
     </header>
 
     <section>
         <article class="case-study">
             <div class="case-study-grid">
                 <div><p class="case-number" style="margin-bottom: 0.75rem;">01 / INDUSTRY</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Production LLM Platform</h2><p class="text-secondary">LLM-powered WhatsApp inquiry platform for pharmaceutical distribution, built from scratch with Azure OpenAI classification, Azure App Service deployment, and Snowflake-backed logging.</p><div class="architecture"><p class="architecture-title">Architecture</p><div class="pipeline"><span>WhatsApp</span><i>→</i><span>Azure OpenAI</span><i>→</i><span>Product catalog</span><i>→</i><span>Snowflake</span></div></div></div>
-                <aside><div class="case-metric"><strong>1,500+</strong><span class="case-meta">product catalog entries</span></div><p class="case-meta">Prowess Consulting · Data & AI Engineering Intern</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">Azure OpenAI</span><span class="tag">Snowflake</span><span class="tag">CI/CD</span></div></aside>
+                <aside><div class="case-metric"><strong>1,500+</strong><span class="case-meta">product catalog entries</span></div><p class="case-meta">Prowess Consulting · Data & AI Engineering Intern</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">Azure OpenAI</span><span class="tag">Snowflake</span><span class="tag">CI/CD</span></div><p class="case-status">Employer-owned work</p><p class="evidence">Built during an industrial internship. The architecture, role, and scope are documented here.</p></aside>
             </div>
         </article>
         <article class="case-study">
             <div class="case-study-grid">
                 <div><p class="case-number" style="margin-bottom: 0.75rem;">02 / INDUSTRY</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">SalesVitals</h2><p class="text-secondary">FastAPI analytics stack delivering customer insights to pharmaceutical field representatives. A versioned SQLite snapshot strategy, validated in GitHub Actions, replaced recurring warehouse reads for the delivery use case.</p><div class="architecture"><p class="architecture-title">Delivery architecture</p><div class="pipeline"><span>Warehouse data</span><i>→</i><span>SQLite snapshot</span><i>→</i><span>FastAPI</span><i>→</i><span>Field team</span></div></div></div>
-                <aside><div class="case-metric"><strong>0</strong><span class="case-meta">recurring warehouse-query cost for snapshots</span></div><p class="case-meta">Prowess Consulting · Data & AI Engineering Intern</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">GitHub Actions</span></div></aside>
+                <aside><div class="case-metric"><strong>0</strong><span class="case-meta">recurring warehouse-query cost for snapshots</span></div><p class="case-meta">Prowess Consulting · Data & AI Engineering Intern</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">GitHub Actions</span></div><p class="case-status">Employer-owned work</p><p class="evidence">Built during an industrial internship. The delivery architecture and operating constraint are documented here.</p></aside>
             </div>
         </article>
         <article class="case-study">
             <div class="case-study-grid">
                 <div><p class="case-number" style="margin-bottom: 0.75rem;">03 / PRIVACY-AWARE ML</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Banking PII Protection</h2><p class="text-secondary">Local-first PII extraction and anonymization for sensitive banking text. The service pairs multilingual transformer inference with schema-based validation so detections can be cross-checked before redaction.</p><div class="architecture"><p class="architecture-title">Protection architecture</p><div class="pipeline"><span>Banking text</span><i>→</i><span>PII extraction</span><i>→</i><span>Schema validation</span><i>→</i><span>Anonymized output</span></div></div></div>
-                <aside><div class="case-metric"><strong>0.84</strong><span class="case-meta">reported micro-F1 across 32,017 labeled entities</span></div><p class="case-meta">Local inference · validation-aware redaction</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Hugging Face</span><span class="tag">PII</span></div><a href="https://github.com/Harshil411/banking_PII" class="btn btn-outline" style="margin-top: 1rem;" target="_blank" rel="noopener noreferrer">View source ↗</a></aside>
+                <aside><div class="case-metric"><strong>0.84</strong><span class="case-meta">reported micro-F1 across 32,017 labeled entities</span></div><p class="case-meta">Local inference · validation-aware redaction</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Hugging Face</span><span class="tag">PII</span></div><div class="case-links"><a href="https://github.com/Harshil411/banking_PII" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View repository ↗</a></div><p class="case-status">Open source</p><p class="evidence">The repository includes the FastAPI service, React interface, and local model setup.</p></aside>
             </div>
         </article>
         <article class="case-study">
             <div class="case-study-grid">
                 <div><p class="case-number" style="margin-bottom: 0.75rem;">04 / RESEARCH</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Hybrid LSTM + Deep RL Trading</h2><p class="text-secondary">A framework that separates forecasting from execution, combining LSTM models with PPO, DQN, and SAC agents. Evaluated using risk-adjusted NIFTY-50 backtests.</p></div>
-                <aside><div class="case-metric"><strong>~1.8</strong><span class="case-meta">reported Sharpe ratio</span></div><p class="case-meta">IEEE ICCICT 2026 · under publication</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">LSTM</span><span class="tag">PPO</span><span class="tag">DQN</span><span class="tag">SAC</span></div></aside>
+                <aside><div class="case-metric"><strong>~1.8</strong><span class="case-meta">reported Sharpe ratio</span></div><p class="case-meta">IEEE ICCICT 2026, under publication</p><div class="flex flex-wrap" style="gap: .4rem; margin-top: 1rem;"><span class="tag">LSTM</span><span class="tag">PPO</span><span class="tag">DQN</span><span class="tag">SAC</span></div><p class="case-status">Research in progress</p><p class="evidence">The paper is under publication. This page records the project focus and reported backtest result.</p></aside>
             </div>
         </article>
         <article class="case-study">
             <div class="case-study-grid">
                 <div><p class="case-number" style="margin-bottom: 0.75rem;">05 / DEPLOYED EXPERIMENT</p><h2 style="font-size: 2rem; margin-bottom: 1rem;">Manufacturing Defect Prediction</h2><p class="text-secondary">A Random Forest classifier served through FastAPI to demonstrate the full path from a trained model to an inspectable prediction interface. The training data is synthetic by design.</p></div>
-                <aside><a href="/demo" class="btn btn-primary">Inspect the demo →</a><p class="case-meta" style="margin-top: 1rem;">Synthetic data · deployment and evaluation exercise</p></aside>
+                <aside><div class="case-links"><a href="/demo" class="btn btn-primary">Inspect the demo →</a><a href="https://github.com/Harshil411/portfolio" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View implementation ↗</a></div><p class="case-meta" style="margin-top: 1rem;">Synthetic data · deployment and evaluation exercise</p><p class="case-status">Live implementation</p><p class="evidence">Inspect the running model, held-out metrics, feature importances, and source code.</p></aside>
             </div>
         </article>
     </section>

@@ -4,11 +4,11 @@
     <div>
         <p class="eyebrow" style="margin-bottom: 0.75rem;">Deployed experiment / model serving</p>
         <h1>Live ML Demo</h1>
-        <p class="text-secondary" style="margin-top: 0.5rem;">Manufacturing Defect Prediction — an inspectable Random Forest classifier served as a FastAPI microservice.</p>
+        <p class="text-secondary" style="margin-top: 0.5rem;">Manufacturing Defect Prediction. An inspectable Random Forest classifier served as a FastAPI microservice.</p>
     </div>
 
     <aside class="note" aria-label="Demo dataset note">
-        <strong>About this demonstration.</strong> The model is trained on synthetic manufacturing sensor data. It demonstrates serving, interface design, and evaluation communication—not a production safety system or a claim about real-world defect rates.
+        <strong>About this demonstration.</strong> The model is trained on synthetic manufacturing sensor data. It demonstrates serving, interface design, and evaluation communication. It does not claim real-world defect rates or production safety performance.
     </aside>
 
     {% if model_meta %}
@@ -55,31 +55,31 @@
 
         <form id="predict-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <label>Temperature (°C)</label>
-                <input type="number" step="0.1" name="temperature" value="75.0" required>
+                <label for="temperature">Temperature (°C)</label>
+                <input id="temperature" type="number" step="0.1" name="temperature" value="75.0" required>
             </div>
             <div>
-                <label>Humidity (%)</label>
-                <input type="number" step="0.1" name="humidity" value="60.0" required>
+                <label for="humidity">Humidity (%)</label>
+                <input id="humidity" type="number" step="0.1" name="humidity" value="60.0" required>
             </div>
             <div>
-                <label>Pressure (kPa)</label>
-                <input type="number" step="0.1" name="pressure" value="101.0" required>
+                <label for="pressure">Pressure (kPa)</label>
+                <input id="pressure" type="number" step="0.1" name="pressure" value="101.0" required>
             </div>
             <div>
-                <label>Vibration (mm/s)</label>
-                <input type="number" step="0.01" name="vibration" value="0.5" required>
+                <label for="vibration">Vibration (mm/s)</label>
+                <input id="vibration" type="number" step="0.01" name="vibration" value="0.5" required>
             </div>
             <div>
-                <label>RPM</label>
-                <input type="number" name="rpm" value="1500" required>
+                <label for="rpm">RPM</label>
+                <input id="rpm" type="number" name="rpm" value="1500" required>
             </div>
             <div style="display: flex; align-items: flex-end;">
                 <button type="submit" class="btn btn-primary w-full">Predict Defect</button>
             </div>
         </form>
 
-        <div id="result" class="hidden" style="margin-top: 1.5rem;">
+        <div id="result" class="hidden" style="margin-top: 1.5rem;" aria-live="polite">
             <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Prediction Result</h3>
             <div id="result-content" style="padding: 1rem; border-radius: var(--radius);"></div>
         </div>
@@ -109,7 +109,7 @@
             </div>
             <div>
                 <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Serving</h3>
-                <p class="text-secondary" style="font-size: 0.875rem;">FastAPI + Uvicorn, Docker container, GitHub Actions CI/CD, deployed on Azure App Service.</p>
+                <p class="text-secondary" style="font-size: 0.875rem;">FastAPI and Uvicorn in Docker, deployed on Google Compute Engine with GitHub Actions.</p>
             </div>
             <div>
                 <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Endpoint</h3>
@@ -123,30 +123,38 @@
 document.getElementById('predict-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const response = await fetch('/predict', {
-        method: 'POST',
-        body: formData
-    });
-    const data = await response.json();
     const resultDiv = document.getElementById('result');
     const contentDiv = document.getElementById('result-content');
 
-    if (data.prediction === 1) {
-        contentDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.08)';
-        contentDiv.style.border = '1px solid rgba(239, 68, 68, 0.25)';
-        contentDiv.innerHTML = `
-            <p style="color: #dc2626; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Defect Likely</p>
-            <p style="color: #ef4444; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability: ${(data.probability.defect * 100).toFixed(1)}%</p>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: inspect the equipment and sensor readings.</p>
-        `;
-    } else {
-        contentDiv.style.backgroundColor = 'rgba(5, 150, 105, 0.08)';
-        contentDiv.style.border = '1px solid rgba(5, 150, 105, 0.25)';
-        contentDiv.innerHTML = `
-            <p style="color: #059669; font-weight: 600; margin-bottom: 0.5rem;">✅ No Defect Predicted</p>
-            <p style="color: #10b981; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability of defect: ${(data.probability.defect * 100).toFixed(1)}%</p>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: review alongside normal operating checks.</p>
-        `;
+    try {
+        const response = await fetch('/predict', {
+            method: 'POST',
+            body: formData
+        });
+        if (!response.ok) throw new Error('Prediction request failed');
+        const data = await response.json();
+
+        if (data.prediction === 1) {
+            contentDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.08)';
+            contentDiv.style.border = '1px solid rgba(239, 68, 68, 0.25)';
+            contentDiv.innerHTML = `
+                <p style="color: #dc2626; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Defect Likely</p>
+                <p style="color: #ef4444; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability: ${(data.probability.defect * 100).toFixed(1)}%</p>
+                <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: inspect the equipment and sensor readings.</p>
+            `;
+        } else {
+            contentDiv.style.backgroundColor = 'rgba(5, 150, 105, 0.08)';
+            contentDiv.style.border = '1px solid rgba(5, 150, 105, 0.25)';
+            contentDiv.innerHTML = `
+                <p style="color: #059669; font-weight: 600; margin-bottom: 0.5rem;">✅ No Defect Predicted</p>
+                <p style="color: #10b981; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability of defect: ${(data.probability.defect * 100).toFixed(1)}%</p>
+                <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: review alongside normal operating checks.</p>
+            `;
+        }
+    } catch (error) {
+        contentDiv.style.backgroundColor = 'rgba(194, 65, 12, 0.08)';
+        contentDiv.style.border = '1px solid rgba(194, 65, 12, 0.25)';
+        contentDiv.innerHTML = '<p style="color: #9a3412; font-weight: 600;">The demo could not return a prediction. Please try again.</p>';
     }
     resultDiv.classList.remove('hidden');
 });
