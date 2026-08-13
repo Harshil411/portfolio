@@ -96,7 +96,7 @@ async def api_projects():
             "name": "Banking PII Protection",
             "description": "Local-first PII extraction and anonymization for sensitive banking text",
             "tech": ["FastAPI", "React", "Hugging Face", "Python"],
-            "highlights": ["Multilingual transformer inference", "Schema-based entity validation", "Reported micro-F1: 0.84"]
+            "highlights": ["Multilingual transformer inference", "Schema-based entity validation", "Reported micro-F1: 0.866"]
         },
         {
             "name": "DRL Trading System",

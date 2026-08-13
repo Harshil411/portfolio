@@ -59,7 +59,7 @@ def main():
     section("Selected projects", story)
     story.extend([
         Paragraph("Banking PII Protection | github.com/Harshil411/banking_PII", styles["role"]),
-        bullet("Built a local-first FastAPI and React service for PII extraction, schema validation, and anonymized output. Reported micro-F1: 0.84 across 32,017 labeled entities."),
+        bullet("Built a local-first FastAPI and React service for PII extraction, schema validation, and anonymized output. Reported micro-F1: 0.866 across 32,017 labeled entities."),
         Spacer(1, 3),
         Paragraph("Manufacturing Defect Prediction | github.com/Harshil411/portfolio", styles["role"]),
         bullet("Deployed an inspectable Random Forest classifier through FastAPI. The project uses synthetic manufacturing sensor data and documents its model behavior and evaluation."),
