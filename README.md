@@ -1,4 +1,4 @@
-# Harshil Agrawal — Portfolio & ML Demo
+# Harshil Agrawal: Portfolio & ML Demo
 
 A minimal FastAPI portfolio website with a deployed Random Forest microservice. Built to demonstrate production ML serving, CI/CD, and containerization.
 
@@ -36,12 +36,12 @@ Open http://localhost:8000
 
 ## API
 
-- `GET /` — Home page
-- `GET /projects` — Projects page
-- `GET /demo` — ML demo page
-- `POST /predict` — Defect prediction endpoint
-- `GET /health` — Health check
-- `GET /api/projects` — Projects JSON
+- `GET /`: Home page
+- `GET /projects`: Projects page
+- `GET /demo`: ML demo page
+- `POST /predict`: Defect prediction endpoint
+- `GET /health`: Health check
+- `GET /api/projects`: Projects JSON
 
 ## Deployment
 

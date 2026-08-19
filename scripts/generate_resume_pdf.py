@@ -33,12 +33,11 @@ def main():
     document = SimpleDocTemplate(str(OUTPUT), pagesize=letter, leftMargin=0.55 * inch, rightMargin=0.55 * inch, topMargin=0.45 * inch, bottomMargin=0.45 * inch)
     story = [
         Paragraph("Harshil Agrawal", styles["name"]),
-        Paragraph("harshilsagrawal@gmail.com | +91 87667 76202 | Ahmedabad, India to Blacksburg, VA | linkedin.com/in/harshil-agrawal | github.com/Harshil411", styles["contact"]),
+        Paragraph("harshilsagrawal@gmail.com | +91 87667 76202 | Ahmedabad, India | linkedin.com/in/harshil-agrawal | github.com/Harshil411", styles["contact"]),
     ]
 
     section("Education", story)
     story.extend([
-        Paragraph("Virginia Tech | M.S. Data Science | Blacksburg, VA | Aug 2026 - May 2028", styles["role"]),
         Paragraph("SVKM's NMIMS University, MPSTME, Mumbai | B.Tech Computer Engineering, GPA: 3.60/4.0 | Graduated May 2026", styles["detail"]),
     ])
 
