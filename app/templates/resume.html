@@ -1,114 +1,133 @@
 {% extends "base.html" %}
+{% set tab = "resume" %}
+{% block description %}Resume of Harshil Agrawal: M.S. Data Science at Virginia Tech, Data & AI Engineering Intern at Prowess Consulting, IEEE ICCICT 2026 research on hybrid LSTM and deep RL.{% endblock %}
+
+{% block toc %}
+<li class="h1"><a href="#top">Resume</a></li>
+<li class="h2"><a href="#education">Education</a></li>
+<li class="h2"><a href="#experience">Experience</a></li>
+<li class="h2"><a href="#projects">Selected projects</a></li>
+<li class="h2"><a href="#research">Research</a></li>
+<li class="h2"><a href="#development">Development &amp; award</a></li>
+<li class="h2"><a href="#skills">Skills</a></li>
+{% endblock %}
+
 {% block content %}
-<div class="space-y-10">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-            <p class="eyebrow" style="margin-bottom: 0.75rem;">Curriculum vitae / updated 2026</p>
-            <h1>Resume</h1>
-            <p class="text-secondary" style="margin-top: 0.5rem;">Incoming M.S. Data Science student at Virginia Tech.</p>
-        </div>
-        <a class="btn btn-primary" href="/static/Harshil_Agrawal_Resume.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
+<div class="cell md hero" id="top">
+    <div class="body">
+        <p class="eyebrow">Resume · updated Nov 2026</p>
+        <h1>Harshil Agrawal</h1>
+        <p>M.S. Data Science student at Virginia Tech. Previously a Data &amp; AI Engineering Intern at Prowess Consulting.</p>
+        <ul class="c-links">
+            <li><a href="mailto:{{ email }}">{{ email }}</a></li>
+            <li><a href="tel:+15409986474">+1 (540) 998-6474</a></li>
+            <li>Blacksburg, VA</li>
+            <li><a href="https://www.linkedin.com/in/harshil-agrawal/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/Harshil411" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+        </ul>
+        <p class="actions"><a class="btn primary" href="/static/Harshil_Agrawal_Resume.pdf" download>Download PDF <span aria-hidden="true">↓</span></a><a class="btn" href="/#contact">Get in touch</a></p>
     </div>
+</div>
 
-    <section class="record-section">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Education</h2>
-        <div class="space-y-4">
-            <div class="flex flex-col md:flex-row md:justify-between gap-2">
-                <div>
-                    <h3 style="font-size: 1.125rem;">Virginia Tech</h3>
-                    <p class="text-secondary">M.S. in Data Science, Blacksburg, VA</p>
-                </div>
-                <p class="text-tertiary font-mono" style="font-size: 0.875rem;">Aug 2026 to May 2028</p>
-            </div>
-            <div class="flex flex-col md:flex-row md:justify-between gap-2">
-                <div>
-                    <h3 style="font-size: 1.125rem;">SVKM's NMIMS University, MPSTME, Mumbai</h3>
-                    <p class="text-secondary">B.Tech in Computer Engineering, GPA: 3.60/4.0</p>
-                </div>
-                <p class="text-tertiary font-mono" style="font-size: 0.875rem;">Graduated May 2026</p>
-            </div>
+<div class="cell md" id="education">
+    <div class="body">
+        <h2>Education</h2>
+        <div class="cv">
+            <div><div class="cv-head"><h3>Virginia Tech</h3><p class="cv-when">Aug 2026 – May 2028</p></div><p class="cv-sub">M.S. in Data Science · Blacksburg, VA</p></div>
+            <div><div class="cv-head"><h3>SVKM's NMIMS University, MPSTME, Mumbai</h3><p class="cv-when">Graduated May 2026</p></div><p class="cv-sub">B.Tech in Computer Engineering · GPA 3.60 / 4.0</p></div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section class="record-section">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Experience</h2>
-        <div class="space-y-6">
+<div class="cell md" id="experience">
+    <div class="body">
+        <h2>Experience</h2>
+        <div class="cv">
             <div>
-                <div class="flex flex-col md:flex-row md:justify-between gap-2" style="margin-bottom: 0.75rem;">
-                    <h3 style="font-size: 1.125rem;">Prowess Consulting, Data & AI Engineering Intern</h3>
-                    <p class="text-tertiary font-mono" style="font-size: 0.875rem;">Dec 2025 to Jun 2026</p>
-                </div>
-                <ul class="text-secondary" style="list-style: none; padding-left: 1rem;">
-                    <li style="margin-bottom: 0.5rem;">→ Owned end-to-end delivery of LLM-powered WhatsApp ordering platform on Azure App Service for pharmaceutical distribution.</li>
-                    <li style="margin-bottom: 0.5rem;">→ Integrated Azure OpenAI intent classification with 1,500+ product catalog and Snowflake-backed conversation logging.</li>
-                    <li style="margin-bottom: 0.5rem;">→ Built SalesVitals FastAPI analytics stack with SQLite snapshot mode, eliminating recurring Snowflake costs.</li>
-                    <li>→ Maintained reproducibility via Git/GitHub Actions and automated test suites.</li>
+                <div class="cv-head"><h3>Prowess Consulting</h3><p class="cv-when">Dec 2025 – Jun 2026</p></div>
+                <p class="cv-sub">Data &amp; AI Engineering Intern</p>
+                <ul>
+                    <li>Shipped a WhatsApp ordering assistant for pharmaceutical distribution on Azure App Service that has handled 10,000+ orders from about 1,000 pharmacies, using Azure OpenAI intent classification over a 1,500+ product catalog with Snowflake-backed conversation logs.</li>
+                    <li>Built SalesVitals, a FastAPI customer-insights tool that shows pharmaceutical field reps a customer's full history before each call; before it, every outreach was manual, with no view of the customer.</li>
+                    <li>Removed per-request Snowflake queries and their recurring cost by serving SalesVitals from a scheduled SQLite snapshot, validated on every build in GitHub Actions.</li>
+                    <li>Maintained reproducibility with Git, GitHub Actions, and automated test suites.</li>
                 </ul>
             </div>
             <div>
-                <div class="flex flex-col md:flex-row md:justify-between gap-2" style="margin-bottom: 0.75rem;">
-                    <h3 style="font-size: 1.125rem;">Gram Panchayat, Maharashtra, Social Impact Data Analyst (Volunteer)</h3>
-                    <p class="text-tertiary font-mono" style="font-size: 0.875rem;">2024</p>
-                </div>
-                <ul class="text-secondary" style="list-style: none; padding-left: 1rem;">
-                    <li style="margin-bottom: 0.5rem;">→ Collected and analyzed community participation, sanitation, and education data for rural development.</li>
-                    <li style="margin-bottom: 0.5rem;">→ Tracked 500+ sapling plantations and evaluated sanitation and digital-literacy programs.</li>
-                    <li>→ Collaborated with local authorities to optimize resource allocation for old-age homes and orphanages.</li>
+                <div class="cv-head"><h3>Gram Panchayat, Maharashtra</h3><p class="cv-when">2024</p></div>
+                <p class="cv-sub">Social Impact Data Analyst (Volunteer)</p>
+                <ul>
+                    <li>Collected and analyzed community participation, sanitation, and education data for rural development.</li>
+                    <li>Tracked 500+ sapling plantations and evaluated sanitation and digital-literacy programs.</li>
+                    <li>Worked with local authorities on resource allocation for old-age homes and orphanages.</li>
                 </ul>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section class="record-section">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Research</h2>
-        <div>
-            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">A Hybrid LSTM + Deep Reinforcement Learning Framework for Enterprise-Grade Decision Support and Automated Trading</h3>
-            <p class="text-accent font-mono" style="font-size: 0.875rem; margin-bottom: 0.75rem;">IEEE ICCICT 2026 (under publication)</p>
-            <ul class="text-secondary" style="list-style: none; padding-left: 1rem;">
-                <li style="margin-bottom: 0.5rem;">→ Proposes a hybrid LSTM and Deep RL framework that separates forecasting from execution.</li>
-                <li style="margin-bottom: 0.5rem;">→ Validated on NIFTY-50 backtests with Sharpe ratio ~1.8.</li>
-                <li>→ Algorithms: LSTM, PPO, DQN, SAC.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="record-section">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Professional development &amp; award</h2>
-        <div class="space-y-4 text-secondary">
-            <p><strong style="color: var(--text-primary);">Certificate of Participation in ACM SemiCode</strong><br>Unstop, Mar 2024 · Credential ID: da0389db-6732-4f51-a3fb-4b97ec5dfe93</p>
-            <p><strong style="color: var(--text-primary);">Workshops</strong><br>Power BI Workshop; AI Prompting and N8N Automation Workshop, Prowess Consulting; AI and HPC Workshop, KLA and IIT Madras.</p>
-            <p><strong style="color: var(--text-primary);">Award</strong><br>Best Executive in Public Relations, Google Developer Student Clubs, NMIMS.</p>
-        </div>
-    </section>
-
-    <section class="record-section">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">Skills</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="cell md" id="projects">
+    <div class="body">
+        <h2>Selected projects</h2>
+        <div class="cv">
             <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Programming</h3>
-                <div class="flex flex-wrap" style="gap: 0.5rem;">
-                    <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">JavaScript</span>
-                </div>
+                <div class="cv-head"><h3>Mortgage PII Service</h3><p class="cv-when">2026</p></div>
+                <p class="cv-sub">Python, FastAPI, spaCy, Presidio, Docker · <a href="https://github.com/Harshil411/banking_PII" target="_blank" rel="noopener noreferrer">Repository <span aria-hidden="true">↗</span></a></p>
+                <ul>
+                    <li>Built a Dockerized NLP service in FastAPI that finds and redacts 19 types of personal data in US mortgage and loan-servicing documents, from SSNs and routing numbers to borrower names, and runs with networking disabled so sensitive text stays on the machine.</li>
+                    <li>Resolved overlapping matches by strength of evidence, letting checksum validators (SSA, ABA routing, Luhn) outrank spaCy NER confidence, and returned every rejected match with its reason so each redaction can be audited.</li>
+                    <li>Reached 0.977 strict micro-F1 (0.981 precision, 0.974 recall) on 2,070 labeled entities in held-out synthetic documents; the evaluation and 267 pytest tests run on every push in GitHub Actions.</li>
+                </ul>
             </div>
             <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Backend & Frameworks</h3>
-                <div class="flex flex-wrap" style="gap: 0.5rem;">
-                    <span class="tag">FastAPI</span><span class="tag">Spring Boot</span><span class="tag">Spring Cloud</span><span class="tag">REST API</span>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Cloud & DevOps</h3>
-                <div class="flex flex-wrap" style="gap: 0.5rem;">
-                    <span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.75rem;">Data & ML</h3>
-                <div class="flex flex-wrap" style="gap: 0.5rem;">
-                    <span class="tag">Snowflake</span><span class="tag">SQLite</span><span class="tag">LSTM</span><span class="tag">Deep RL</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span>
-                </div>
+                <div class="cv-head"><h3>Manufacturing Defect Prediction</h3></div>
+                <p class="cv-sub">Python, scikit-learn, FastAPI, Docker · <a href="/demo">Live model</a></p>
+                <ul>
+                    <li>Deployed an inspectable Random Forest classifier through FastAPI. The project uses synthetic manufacturing sensor data and documents its model behavior and evaluation.</li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</div>
+
+<div class="cell md" id="research">
+    <div class="body">
+        <h2>Research</h2>
+        <div class="cv">
+            <div>
+                <h3>A Hybrid LSTM + Deep Reinforcement Learning Framework for Enterprise-Grade Decision Support and Automated Trading</h3>
+                <p class="cv-sub"><span class="status status--progress">IEEE ICCICT 2026 · accepted</span></p>
+                <ul>
+                    <li>Proposes a hybrid LSTM and Deep RL framework that separates forecasting from execution.</li>
+                    <li>Validated on NIFTY-50 backtests with a Sharpe ratio of about 1.8 using LSTM, PPO, DQN, and SAC.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cell md" id="development">
+    <div class="body">
+        <h2>Development &amp; award</h2>
+        <div class="cv">
+            <div><div class="cv-head"><h3>Certificate of Participation, ACM SemiCode</h3><p class="cv-when">Mar 2024</p></div><p class="cv-sub">Unstop · Credential ID da0389db-6732-4f51-a3fb-4b97ec5dfe93</p></div>
+            <div><h3>Workshops</h3><p class="cv-sub">Power BI Workshop · AI Prompting and N8N Automation Workshop, Prowess Consulting · AI and HPC Workshop, KLA and IIT Madras</p></div>
+            <div><h3>Best Executive in Public Relations</h3><p class="cv-sub">Google Developer Student Clubs, NMIMS</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="cell md" id="skills">
+    <div class="body">
+        <h2>Skills</h2>
+        <div class="cv">
+            <dl class="facts">
+                <div><dt>Programming</dt><dd>Python, SQL, Java, C, C++, JavaScript</dd></div>
+                <div><dt>Backend</dt><dd>FastAPI, Spring Boot, Spring Cloud, REST API</dd></div>
+                <div><dt>Cloud</dt><dd>Azure, Docker, GitHub Actions, CI/CD</dd></div>
+                <div><dt>Data &amp; ML</dt><dd>Snowflake, SQLite, LSTM, Deep RL, scikit-learn, pandas</dd></div>
+            </dl>
+        </div>
+    </div>
 </div>
 {% endblock %}

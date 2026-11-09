@@ -1,162 +1,84 @@
 {% extends "base.html" %}
+{% from "_macros.html" import code, pct, fields, live_cell with context %}
+{% set tab = "model" %}
+{% set code_cells = 4 %}
+{% set m = model_meta %}
+{% set r = presets[0][1] %}
+{% set curl = "curl -X POST https://harshil-portfolio.duckdns.org/predict \\\n  -F temperature=%s -F humidity=%s -F pressure=%s \\\n  -F vibration=%s -F rpm=%s" % (r.temperature, r.humidity, r.pressure, r.vibration, r.rpm) %}
+{% block description %}A live Random Forest defect-prediction model served by FastAPI. Move the sensor sliders and watch it answer, with its held-out accuracy, the baseline it beats, and what drives its predictions.{% endblock %}
+
+{% block toc %}
+<li class="h1"><a href="#top">Manufacturing defect model</a></li>
+<li class="h2"><a href="#model-cell">Try it</a></li>
+<li class="h2"><a href="#eval">How well it scores</a></li>
+<li class="h2"><a href="#drivers">What drives it</a></li>
+<li class="h2"><a href="#limits">What it can't tell you</a></li>
+<li class="h2"><a href="#api">From a terminal</a></li>
+{% endblock %}
+
 {% block content %}
-<div class="space-y-8">
-    <div>
-        <p class="eyebrow" style="margin-bottom: 0.75rem;">Deployed experiment / model serving</p>
-        <h1>Live ML Demo</h1>
-        <p class="text-secondary" style="margin-top: 0.5rem;">Manufacturing Defect Prediction. An inspectable Random Forest classifier served as a FastAPI microservice.</p>
+<div class="cell md hero" id="top">
+    <div class="body">
+        <p class="eyebrow">model.ipynb · Live model</p>
+        <h1>Manufacturing defect model</h1>
+        <p>This model predicts whether a manufactured part is likely to be defective from five machine-sensor readings. Pick a scenario or move a slider, and the model running on this server answers instantly. <span class="note">It's trained on synthetic data by design, so it shows serving and honest evaluation, not real-factory performance.</span></p>
     </div>
-
-    <aside class="note" aria-label="Demo dataset note">
-        <strong>About this demonstration.</strong> The model is trained on synthetic manufacturing sensor data. It demonstrates serving, interface design, and evaluation communication. It does not claim real-world defect rates or production safety performance.
-    </aside>
-
-    {% if model_meta %}
-    <section class="surface">
-        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Evaluation snapshot</h2>
-        <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: 1.5rem;">Held-out test-set metrics from this synthetic-data experiment.</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div style="background-color: var(--bg-tertiary); border-radius: var(--radius); padding: 1.5rem; text-align: center;">
-                <p class="text-tertiary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Test accuracy</p>
-                <p class="font-mono text-accent" style="font-size: 2rem;">{{ model_meta.accuracy }}</p>
-            </div>
-            <div style="background-color: var(--bg-tertiary); border-radius: var(--radius); padding: 1.5rem; text-align: center;">
-                <p class="text-tertiary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Train Samples</p>
-                <p class="font-mono" style="font-size: 2rem;">{{ model_meta.train_samples }}</p>
-            </div>
-            <div style="background-color: var(--bg-tertiary); border-radius: var(--radius); padding: 1.5rem; text-align: center;">
-                <p class="text-tertiary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Test Samples</p>
-                <p class="font-mono" style="font-size: 2rem;">{{ model_meta.test_samples }}</p>
-            </div>
-            <div style="background-color: var(--bg-tertiary); border-radius: var(--radius); padding: 1.5rem; text-align: center;">
-                <p class="text-tertiary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Algorithm</p>
-                <p class="font-mono" style="font-size: 1.25rem;">Random Forest</p>
-            </div>
-        </div>
-
-        <h3 style="font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem;">Feature Importances</h3>
-        <div class="space-y-3">
-            {% for feature, importance in model_meta.feature_importances.items() %}
-            <div class="flex items-center" style="gap: 1rem;">
-                <span class="font-mono" style="width: 7rem; font-size: 0.875rem; color: var(--text-secondary); text-transform: capitalize;">{{ feature }}</span>
-                <div style="flex: 1; background-color: var(--bg-tertiary); border-radius: 9999px; height: 0.5rem; overflow: hidden;">
-                    <div style="background-color: var(--accent); height: 100%; width: {{ (importance * 100)|round(1) }}%; transition: width 0.3s;"></div>
-                </div>
-                <span class="font-mono" style="width: 4rem; text-align: right; font-size: 0.875rem; color: var(--accent);">{{ (importance * 100)|round(1) }}%</span>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-    {% endif %}
-
-    <section class="surface">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Make a Prediction</h2>
-        <p class="text-secondary" style="margin-bottom: 1.5rem;">Enter manufacturing sensor values to get a real-time defect prediction.</p>
-
-        <form id="predict-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label for="temperature">Temperature (°C)</label>
-                <input id="temperature" type="number" step="0.1" name="temperature" value="75.0" required>
-            </div>
-            <div>
-                <label for="humidity">Humidity (%)</label>
-                <input id="humidity" type="number" step="0.1" name="humidity" value="60.0" required>
-            </div>
-            <div>
-                <label for="pressure">Pressure (kPa)</label>
-                <input id="pressure" type="number" step="0.1" name="pressure" value="101.0" required>
-            </div>
-            <div>
-                <label for="vibration">Vibration (mm/s)</label>
-                <input id="vibration" type="number" step="0.01" name="vibration" value="0.5" required>
-            </div>
-            <div>
-                <label for="rpm">RPM</label>
-                <input id="rpm" type="number" name="rpm" value="1500" required>
-            </div>
-            <div style="display: flex; align-items: flex-end;">
-                <button type="submit" class="btn btn-primary w-full">Predict Defect</button>
-            </div>
-        </form>
-
-        <div id="result" class="hidden" style="margin-top: 1.5rem;" aria-live="polite">
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Prediction Result</h3>
-            <div id="result-content" style="padding: 1rem; border-radius: var(--radius);"></div>
-        </div>
-    </section>
-
-    <section class="surface">
-        <p class="eyebrow" style="margin-bottom: 0.75rem;">Interpretation</p>
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">What this result can and cannot tell us</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Useful here</h3>
-                <p class="text-secondary" style="font-size: 0.875rem;">The interface exposes model inputs, response probabilities, and feature importances so the prediction path is visible rather than treated as a black box.</p>
-            </div>
-            <div>
-                <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--signal);">Not a deployment claim</h3>
-                <p class="text-secondary" style="font-size: 0.875rem;">Synthetic data cannot establish field performance. A real deployment would require representative labels, calibration, threshold selection, drift monitoring, and human review.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="surface">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Technical Details</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Model</h3>
-                <p class="text-secondary" style="font-size: 0.875rem;">Random Forest Classifier, scikit-learn, trained on 5,000 synthetic manufacturing sensor samples.</p>
-            </div>
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Serving</h3>
-                <p class="text-secondary" style="font-size: 0.875rem;">FastAPI and Uvicorn in Docker, deployed on Google Compute Engine with GitHub Actions.</p>
-            </div>
-            <div>
-                <h3 class="text-accent" style="font-size: 1rem; margin-bottom: 0.5rem;">Endpoint</h3>
-                <p class="font-mono text-secondary" style="font-size: 0.875rem;">POST /predict<br>Content-Type: multipart/form-data</p>
-            </div>
-        </div>
-    </section>
 </div>
 
-<script>
-document.getElementById('predict-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const resultDiv = document.getElementById('result');
-    const contentDiv = document.getElementById('result-content');
+{{ live_cell(1, "#eval", "how it was evaluated ↓") }}
 
-    try {
-        const response = await fetch('/predict', {
-            method: 'POST',
-            body: formData
-        });
-        if (!response.ok) throw new Error('Prediction request failed');
-        const data = await response.json();
+<div class="cell md" id="eval">
+    <div class="body">
+        <h2>How well it scores</h2>
+        <p>Measured on {{ '{:,}'.format(m.test_samples) }} test readings the model never saw during training.</p>
+    </div>
+</div>
 
-        if (data.prediction === 1) {
-            contentDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.08)';
-            contentDiv.style.border = '1px solid rgba(239, 68, 68, 0.25)';
-            contentDiv.innerHTML = `
-                <p style="color: #dc2626; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Defect Likely</p>
-                <p style="color: #ef4444; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability: ${(data.probability.defect * 100).toFixed(1)}%</p>
-                <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: inspect the equipment and sensor readings.</p>
-            `;
-        } else {
-            contentDiv.style.backgroundColor = 'rgba(5, 150, 105, 0.08)';
-            contentDiv.style.border = '1px solid rgba(5, 150, 105, 0.25)';
-            contentDiv.innerHTML = `
-                <p style="color: #059669; font-weight: 600; margin-bottom: 0.5rem;">✅ No Defect Predicted</p>
-                <p style="color: #10b981; font-size: 0.875rem; margin-bottom: 0.5rem;">Probability of defect: ${(data.probability.defect * 100).toFixed(1)}%</p>
-                <p style="color: var(--text-secondary); font-size: 0.875rem;">Illustrative next step: review alongside normal operating checks.</p>
-            `;
-        }
-    } catch (error) {
-        contentDiv.style.backgroundColor = 'rgba(194, 65, 12, 0.08)';
-        contentDiv.style.border = '1px solid rgba(194, 65, 12, 0.25)';
-        contentDiv.innerHTML = '<p style="color: #9a3412; font-weight: 600;">The demo could not return a prediction. Please try again.</p>';
-    }
-    resultDiv.classList.remove('hidden');
-});
-</script>
+{% call code(2, 'model<span class="op">.</span><span class="fn">score</span>(X_test, y_test), (y_test <span class="op">==</span> <span class="nu">0</span>)<span class="op">.</span><span class="fn">mean</span>()' | safe) %}
+<div class="result">
+    <dl class="facts">
+        <div><dt>Accuracy</dt><dd>{{ pct(m.accuracy) }} <span class="why">Share of the {{ '{:,}'.format(m.test_samples) }} held-out readings it labels correctly.</span></dd></div>
+        <div><dt>Baseline</dt><dd>{{ pct(m.baseline_accuracy) }} <span class="why">What always guessing “no defect” would score, since {{ pct(1 - m.baseline_accuracy) }} of test readings are defects.</span></dd></div>
+        <div><dt>Trained on</dt><dd>{{ '{:,}'.format(m.train_samples) }} readings <span class="why">Synthetic machine-sensor data, generated by <code>ml/train_model.py</code>.</span></dd></div>
+        <div><dt>Model</dt><dd>Random Forest <span class="why">scikit-learn, served by FastAPI and Uvicorn in Docker on Google Compute Engine.</span></dd></div>
+    </dl>
+</div>
+{% endcall %}
+
+<div class="cell md" id="drivers">
+    <div class="body">
+        <h2>What drives it</h2>
+        <p>How much each reading counts in the model's decisions, from its feature importances. They add up to 100%.</p>
+    </div>
+</div>
+
+{% call code(3, 'model<span class="op">.</span>feature_importances_' | safe) %}
+<div class="result">
+    <ol class="imp">
+        {% for name, value in m.feature_importances | dictsort(by='value', reverse=true) %}
+        <li><span class="imp-n">{{ (fields | selectattr('name', 'equalto', name) | first).label }}</span><span class="imp-bar" aria-hidden="true"><span style="--w: {{ value }}"></span></span><span class="imp-v">{{ '%.1f' % (value * 100) }}%</span></li>
+        {% endfor %}
+    </ol>
+</div>
+{% endcall %}
+
+<div class="cell md" id="limits">
+    <div class="body">
+        <h2>What it can't tell you</h2>
+        <p><strong>Useful here:</strong> the page shows the inputs, the probabilities and what drives them, so the prediction isn't a black box.</p>
+        <p><strong>Not a deployment claim:</strong> synthetic data can't establish field performance. A real deployment would need representative labels, calibration, a chosen threshold, drift monitoring and human review.</p>
+    </div>
+</div>
+
+<div class="cell md" id="api">
+    <div class="body">
+        <h2>From a terminal</h2>
+        <p><code>POST /predict</code> takes the five readings as form fields and returns the label and both class probabilities. Out-of-range readings get a 422.</p>
+        <p class="actions"><button class="btn" type="button" data-copy="{{ curl }}">Copy the curl command</button></p>
+    </div>
+</div>
+
+{% call code(4, '<span class="op">!</span>' | safe ~ curl) %}
+<div class="result"><pre class="repr">{{ api_example }}</pre></div>
+{% endcall %}
 {% endblock %}

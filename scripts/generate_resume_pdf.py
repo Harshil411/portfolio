@@ -1,3 +1,7 @@
+"""Build app/static/Harshil_Agrawal_Resume.pdf. Usage: python scripts/generate_resume_pdf.py
+
+Output is byte-for-byte reproducible (invariant=1), so tests/test_unit.py can tell when the committed PDF is stale.
+"""
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -28,12 +32,12 @@ def section(title, story):
     story.extend([Paragraph(title.upper(), styles["section"]), HRFlowable(width="100%", thickness=0.6, color=colors.HexColor("#d4d2cf")), Spacer(1, 4)])
 
 
-def main():
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    document = SimpleDocTemplate(str(OUTPUT), pagesize=letter, leftMargin=0.55 * inch, rightMargin=0.55 * inch, topMargin=0.45 * inch, bottomMargin=0.45 * inch)
+def main(output=OUTPUT):
+    output.parent.mkdir(parents=True, exist_ok=True)
+    document = SimpleDocTemplate(str(output), invariant=1, pagesize=letter, leftMargin=0.55 * inch, rightMargin=0.55 * inch, topMargin=0.45 * inch, bottomMargin=0.45 * inch)
     story = [
         Paragraph("Harshil Agrawal", styles["name"]),
-        Paragraph("harshilsagrawal@gmail.com | +91 87667 76202 | Ahmedabad, India to Blacksburg, VA | linkedin.com/in/harshil-agrawal | github.com/Harshil411", styles["contact"]),
+        Paragraph("agrawalharshil600@gmail.com | +1 (540) 998-6474 | Blacksburg, VA | linkedin.com/in/harshil-agrawal | github.com/Harshil411", styles["contact"]),
     ]
 
     section("Education", story)
@@ -45,9 +49,9 @@ def main():
     section("Experience", story)
     story.extend([
         Paragraph("Prowess Consulting | Data & AI Engineering Intern | Dec 2025 - Jun 2026", styles["role"]),
-        bullet("Owned end-to-end delivery of an LLM-powered WhatsApp ordering platform on Azure App Service for pharmaceutical distribution."),
-        bullet("Integrated Azure OpenAI intent classification with a 1,500+ product catalog and Snowflake-backed conversation logging."),
-        bullet("Built the SalesVitals FastAPI analytics stack with SQLite snapshot mode, eliminating recurring Snowflake costs."),
+        bullet("Shipped a WhatsApp ordering assistant for pharmaceutical distribution on Azure App Service that has handled 10,000+ orders from about 1,000 pharmacies, using Azure OpenAI intent classification over a 1,500+ product catalog with Snowflake-backed conversation logs."),
+        bullet("Built SalesVitals, a FastAPI customer-insights tool that shows pharmaceutical field reps a customer's full history before each call; before it, every outreach was manual, with no view of the customer."),
+        bullet("Removed per-request Snowflake queries and their recurring cost by serving SalesVitals from a scheduled SQLite snapshot, validated on every build in GitHub Actions."),
         bullet("Maintained reproducibility with Git, GitHub Actions, and automated test suites."),
         Spacer(1, 4),
         Paragraph("Gram Panchayat, Maharashtra | Social Impact Data Analyst, Volunteer | 2024", styles["role"]),
@@ -58,8 +62,11 @@ def main():
 
     section("Selected projects", story)
     story.extend([
-        Paragraph("Banking PII Protection | github.com/Harshil411/banking_PII", styles["role"]),
-        bullet("Built a local-first FastAPI and React service for PII extraction, schema validation, and anonymized output. Reported micro-F1: 0.866 across 32,017 labeled entities."),
+        Paragraph("Mortgage PII Service | Python, FastAPI, spaCy, Presidio, Docker | 2026", styles["role"]),
+        Paragraph("github.com/Harshil411/banking_PII", styles["detail"]),
+        bullet("Built a Dockerized NLP service in FastAPI that finds and redacts 19 types of personal data in US mortgage and loan-servicing documents, from SSNs and routing numbers to borrower names, and runs with networking disabled so sensitive text stays on the machine."),
+        bullet("Resolved overlapping matches by strength of evidence, letting checksum validators (SSA, ABA routing, Luhn) outrank spaCy NER confidence, and returned every rejected match with its reason so each redaction can be audited."),
+        bullet("Reached 0.977 strict micro-F1 (0.981 precision, 0.974 recall) on 2,070 labeled entities in held-out synthetic documents; the evaluation and 267 pytest tests run on every push in GitHub Actions."),
         Spacer(1, 3),
         Paragraph("Manufacturing Defect Prediction | github.com/Harshil411/portfolio", styles["role"]),
         bullet("Deployed an inspectable Random Forest classifier through FastAPI. The project uses synthetic manufacturing sensor data and documents its model behavior and evaluation."),
@@ -68,9 +75,9 @@ def main():
     section("Research", story)
     story.extend([
         Paragraph("A Hybrid LSTM + Deep Reinforcement Learning Framework for Enterprise-Grade Decision Support and Automated Trading", styles["role"]),
-        Paragraph("IEEE ICCICT 2026, under publication", styles["detail"]),
+        Paragraph("IEEE ICCICT 2026, accepted", styles["detail"]),
         bullet("Proposes a hybrid LSTM and Deep RL framework that separates forecasting from execution."),
-        bullet("Validated on NIFTY-50 backtests with a reported Sharpe ratio of about 1.8 using LSTM, PPO, DQN, and SAC."),
+        bullet("Validated on NIFTY-50 backtests with a Sharpe ratio of about 1.8 using LSTM, PPO, DQN, and SAC."),
     ])
 
     section("Professional development and award", story)

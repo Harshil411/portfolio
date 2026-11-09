@@ -1,0 +1,2 @@
+-r requirements.txt
+playwright==1.65.0  # browser tests only (tests/test_browser.py)

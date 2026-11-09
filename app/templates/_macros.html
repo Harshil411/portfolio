@@ -1,0 +1,57 @@
+{# Notebook cells shared by every page. Import with context: the live cell reads presets, normal and model_meta. #}
+{% set fields = [
+    {"name": "temperature", "label": "Temperature", "unit": "°C", "min": 30, "max": 120, "step": 0.5, "dp": 1},
+    {"name": "humidity", "label": "Humidity", "unit": "%", "min": 0, "max": 100, "step": 1, "dp": 0},
+    {"name": "pressure", "label": "Pressure", "unit": "kPa", "min": 70, "max": 130, "step": 0.5, "dp": 1},
+    {"name": "vibration", "label": "Vibration", "unit": "mm/s", "min": 0, "max": 1.5, "step": 0.01, "dp": 2},
+    {"name": "rpm", "label": "Spindle speed", "unit": "RPM", "min": 600, "max": 2400, "step": 10, "dp": 0},
+] %}
+
+{# A code cell: In [n] shows `src` (decoration, hidden when Code is off), Out [n] shows the caller's output. #}
+{% macro code(n, src, id=none, title=none) -%}
+<div class="cell code"{% if id %} id="{{ id }}"{% endif %}>
+    {% if title %}<h2 class="sr-only">{{ title }}</h2>{% endif %}
+    <div class="row in"><span class="prompt" aria-hidden="true">In [<b class="n">{{ n }}</b>]:</span><pre class="src" aria-hidden="true"><code>{{ src }}</code></pre></div>
+    <div class="row out"><span class="prompt o" aria-hidden="true">Out[<b class="n">{{ n }}</b>]:</span>
+        {{ caller() }}
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro pct(x) %}{{ '%.1f' % (x * 100) }}%{% endmacro %}
+
+{# The live model: presets and sliders POST to /predict (notebook.js); the server renders the Normal reading's answer. #}
+{% macro live_cell(n, card_href, card_label) -%}
+{% set reading = presets[0][1] %}
+{% set p = normal.probability.defect %}
+{% set bad = normal.prediction == 1 %}
+<div class="cell code live" id="model-cell">
+    <div class="row in"><span class="prompt" aria-hidden="true">In [<b class="n">{{ n }}</b>]:</span><pre class="src" aria-hidden="true"><code>reading <span class="op">=</span> <span class="fn">Reading</span>(
+{%- for f in fields %}{{ '\n    ' if loop.index is odd }}{{ f.name }}<span class="op">=</span><span class="nu" data-v="{{ f.name }}">{{ '%.*f' % (f.dp, reading[f.name]) }}</span>,{{ ' ' if loop.index is odd and not loop.last }}{% endfor %}
+)
+model<span class="op">.</span><span class="fn">predict_proba</span>(reading)</code></pre></div>
+    <div class="row widgets"><span class="prompt" aria-hidden="true"></span>
+        <form class="w" id="reading" aria-label="Sensor reading" novalidate>
+            <fieldset class="w-presets"><legend class="sr-only">Scenario presets</legend>
+                {% for name, values in presets %}<button type="button" class="chip" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-preset='{{ values | tojson }}'>{{ name }}</button>{% endfor %}
+            </fieldset>
+            {% for f in fields %}
+            <div class="w-row">
+                <label for="w-{{ f.name }}" id="l-{{ f.name }}">{{ f.label }}</label>
+                <input type="range" data-for="{{ f.name }}" aria-labelledby="l-{{ f.name }}" min="{{ f.min }}" max="{{ f.max }}" step="{{ f.step }}" value="{{ reading[f.name] }}">
+                <span class="w-val"><input type="number" id="w-{{ f.name }}" name="{{ f.name }}" min="{{ f.min }}" max="{{ f.max }}" step="{{ f.step }}" value="{{ reading[f.name] }}" inputmode="decimal" required><span>{{ f.unit }}</span></span>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    <div class="row out"><span class="prompt o" aria-hidden="true">Out[<b class="n">{{ n }}</b>]:</span>
+        <div class="result risk" data-verdict="{{ 'bad' if bad else 'ok' }}">
+            <p class="risk-main"><b class="risk-p">{{ pct(p) }}</b><span class="risk-l">defect probability</span>
+                <span class="verdict"><svg class="i-ok" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><svg class="i-bad" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v5M12 16.5v.01"/><circle cx="12" cy="12" r="10"/></svg><span class="verdict-t">{{ 'Defect likely' if bad else 'No defect expected' }}</span></span></p>
+            <div class="meter" aria-hidden="true"><span class="fill" style="--p: {{ p }}"></span><span class="thr"></span><span class="thr-l">50% decision line</span></div>
+            <p class="risk-meta"><span class="ms">computed on the server</span> · Random Forest · {{ pct(model_meta.accuracy) }} accurate on held-out test data, vs {{ pct(model_meta.baseline_accuracy) }} for always guessing “no defect” · <a href="{{ card_href }}">{{ card_label }}</a></p>
+            <p class="sr-only" aria-live="polite" id="risk-sr"></p>
+        </div>
+    </div>
+</div>
+{%- endmacro %}
