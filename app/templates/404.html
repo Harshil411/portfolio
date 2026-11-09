@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "_macros.html" import code %}
+{% set code_cells = 1 %}
+{% block description %}This page could not be found. The portfolio of Harshil Agrawal, M.S. Data Science student at Virginia Tech, is one click away.{% endblock %}
+{% block meta %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block toc %}
+<li class="h1"><a href="/">Harshil Agrawal</a></li>
+<li class="h2"><a href="/#work">Selected work</a></li>
+<li class="h2"><a href="/demo">Live model</a></li>
+<li class="h2"><a href="/resume">Resume</a></li>
+<li class="h2"><a href="/#contact">Get in touch</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="cell md hero" id="top">
+    <div class="body">
+        <p class="eyebrow">Error 404</p>
+        <h1>This page isn't in the notebook.</h1>
+        <p>The link may be old, or the address may have a typo. The work itself is one click away.</p>
+    </div>
+</div>
+
+{% set src %}<span class="fn">open</span>(<span class="st">"{{ request.url.path }}"</span>){% endset %}
+{% call code(1, src) %}
+<div class="result">
+    <pre class="repr err">FileNotFoundError: no page at {{ request.url.path }}</pre>
+    <p class="actions"><a class="btn primary" href="/#work">Read the work <span aria-hidden="true">→</span></a><a class="btn" href="/">Go to the home page</a></p>
+</div>
+{% endcall %}
+{% endblock %}

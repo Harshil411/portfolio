@@ -1,485 +1,87 @@
+{% set site_url = "https://harshil-portfolio.duckdns.org" %}
+{% set email = "agrawalharshil600@gmail.com" %}
+{% set v = "nb1" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Harshil Agrawal builds data and AI systems, with selected work in applied machine learning, data products, and research.">
-    <meta name="theme-color" content="#faf9f7">
-    <title>{{ title }} | Harshil Agrawal</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #faf9f7;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #f5f4f2;
-            --text-primary: #1a1a1a;
-            --text-secondary: #4a4a4a;
-            --text-tertiary: #8a8a8a;
-            --accent: #047857;
-            --accent-hover: #065f46;
-            --accent-light: #e7f3ee;
-            --signal: #c2410c;
-            --border: #e5e3e0;
-            --border-light: #d4d2cf;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --radius: 0.25rem;
-            --radius-lg: 0.5rem;
-            --font-serif: 'IBM Plex Serif', Georgia, serif;
-            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'IBM Plex Mono', Monaco, monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        :focus-visible {
-            outline: 3px solid var(--accent);
-            outline-offset: 3px;
-        }
-
-        .skip-link {
-            background: var(--text-primary);
-            color: white;
-            left: 1rem;
-            padding: 0.65rem 0.9rem;
-            position: fixed;
-            text-decoration: none;
-            top: 1rem;
-            transform: translateY(-200%);
-            z-index: 100;
-        }
-
-        .skip-link:focus { transform: translateY(0); }
-
-        ::selection { background: #cce8db; }
-
-        .container {
-            max-width: 72rem;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 4rem;
-        }
-
-        .nav-brand {
-            font-family: var(--font-serif);
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-decoration: none;
-            letter-spacing: -0.025em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.2s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-toggle {
-            display: none;
-            color: var(--text-primary);
-            background: none;
-            border: 1px solid var(--border);
-            padding: 0.4rem 0.6rem;
-            font: 500 0.75rem var(--font-mono);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        /* Main content */
-        main {
-            padding: 3rem 0 5rem;
-            min-height: calc(100vh - 4rem - 8rem);
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-serif);
-            font-weight: 600;
-            line-height: 1.2;
-            color: var(--text-primary);
-            letter-spacing: -0.025em;
-        }
-
-        h1 { font-size: 3rem; }
-        h2 { font-size: 1.875rem; }
-        h3 { font-size: 1.25rem; }
-
-        .text-accent { color: var(--accent); }
-        .text-secondary { color: var(--text-secondary); }
-        .text-tertiary { color: var(--text-tertiary); }
-        .font-mono { font-family: var(--font-mono); }
-        .font-serif { font-family: var(--font-serif); }
-        .font-sans { font-family: var(--font-sans); }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius);
-            font-weight: 500;
-            font-size: 0.875rem;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background-color: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--border);
-            transform: translateY(-1px);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
-
-        /* Cards and surfaces */
-        .surface {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            box-shadow: none;
-        }
-
-        .surface:hover {
-            border-color: var(--border-light);
-        }
-
-        .eyebrow {
-            color: var(--accent);
-            font: 500 0.75rem/1.4 var(--font-mono);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .hero {
-            display: grid;
-            grid-template-columns: minmax(0, 1.5fr) minmax(16rem, 0.8fr);
-            gap: 4rem;
-            align-items: end;
-            padding: 3rem 0 4rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero-title { font-size: clamp(2.7rem, 7vw, 5.5rem); max-width: 12ch; }
-        .hero-summary { font-size: 1.2rem; line-height: 1.65; max-width: 39rem; }
-        .signal-panel { border-top: 2px solid var(--text-primary); padding-top: 1rem; }
-        .signal-index { color: var(--accent); font: 500 0.7rem var(--font-mono); letter-spacing: 0.12em; margin-bottom: 1rem; text-transform: uppercase; }
-        .signal-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
-        .signal-row span:last-child { font-family: var(--font-mono); font-size: 0.75rem; text-align: right; }
-
-        .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
-        .section-heading h2 { font-size: clamp(1.7rem, 3vw, 2.25rem); }
-        .case-study { border-top: 2px solid var(--text-primary); padding: 1.5rem 0 2.25rem; }
-        .case-study + .case-study { margin-top: 1rem; }
-        .case-study-featured { background: #073b32; border: 0; color: #eff8f3; margin-left: -1.5rem; margin-right: -1.5rem; padding: 2.5rem 1.5rem 2.75rem; position: relative; }
-        .case-study-featured::before { background: #78d4ae; content: ''; height: 4px; left: 0; position: absolute; top: 0; width: 7rem; }
-        .case-study-featured .case-study-grid { gap: 3.5rem; }
-        .case-study-featured h3 { color: white; }
-        .case-study-featured .text-secondary { color: #cfddd6; }
-        .case-study-featured .case-number, .case-study-featured .case-status { color: #9de6c4; }
-        .case-study-featured .case-metric { border-color: #78d4ae; }
-        .case-study-featured .case-metric strong { color: #b5f1d3; }
-        .case-study-featured .case-meta, .case-study-featured .evidence { color: #cfddd6; }
-        .case-study-featured .tag { background: transparent; border-color: rgba(239, 248, 243, 0.32); color: #eff8f3; }
-        .case-study-featured .architecture { background: rgba(255, 255, 255, 0.06); border-color: rgba(239, 248, 243, 0.2); }
-        .case-study-featured .architecture-title { color: #b7cbc1; }
-        .case-study-featured .pipeline span { background: rgba(255, 255, 255, 0.08); border-color: rgba(239, 248, 243, 0.26); color: #eff8f3; }
-        .case-study-featured .pipeline i { color: #9de6c4; }
-        .featured-aside { border-left: 1px solid rgba(239, 248, 243, 0.2); padding-left: 2rem; }
-        .featured-label { color: #9de6c4; font: 500 0.7rem var(--font-mono); letter-spacing: 0.14em; margin-bottom: 0.85rem; text-transform: uppercase; }
-        .case-study-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(16rem, 0.75fr); gap: 3rem; }
-        .case-number { color: var(--accent); font: 500 0.8rem var(--font-mono); letter-spacing: 0.08em; }
-        .case-metric { border-left: 2px solid var(--accent); padding-left: 1rem; margin-bottom: 1.25rem; }
-        .case-metric strong { display: block; font: 600 2rem/1 var(--font-mono); color: var(--accent); }
-        .case-meta { font-size: 0.875rem; color: var(--text-secondary); }
-
-        .architecture { background: var(--bg-tertiary); border: 1px solid var(--border); padding: 1.25rem; margin-top: 1.5rem; }
-        .architecture-title { font: 500 0.7rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 1rem; }
-        .pipeline { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-        .pipeline span { background: var(--bg-secondary); border: 1px solid var(--border-light); padding: 0.45rem 0.55rem; font: 0.72rem var(--font-mono); }
-        .pipeline i { color: var(--accent); font-style: normal; }
-
-        .note { border-left: 2px solid var(--signal); background: #fff8f2; padding: 1rem 1.25rem; color: #7c2d12; font-size: 0.875rem; }
-        .case-status { color: var(--accent); font: 500 0.7rem var(--font-mono); letter-spacing: 0.08em; margin-top: 1.25rem; text-transform: uppercase; }
-        .evidence { border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.82rem; margin-top: 0.5rem; padding-top: 0.85rem; }
-        .project-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr); gap: 3rem; margin-bottom: 3.5rem; }
-        .project-header > div { max-width: 48rem; }
-        .project-note { border-top: 2px solid var(--accent); color: var(--text-secondary); font-size: 0.9rem; padding-top: 1rem; }
-        .project-note strong { color: var(--text-primary); display: block; font: 500 0.72rem var(--font-mono); letter-spacing: 0.08em; margin-bottom: 0.45rem; text-transform: uppercase; }
-        .case-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-        .case-links .btn { padding: 0.6rem 0.9rem; }
-
-        .record-section { border-top: 2px solid var(--text-primary); padding: 1.75rem 0 2.25rem; }
-        .contact-panel { border-top: 2px solid var(--text-primary); padding: 1.75rem 0; }
-
-        /* Accent border */
-        .accent-border {
-            border-left: 3px solid var(--accent);
-            padding-left: 1.5rem;
-        }
-
-        /* Tags */
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 2rem 0;
-        }
-
-        footer .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        footer p {
-            color: var(--text-tertiary);
-            font-size: 0.875rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            color: var(--text-tertiary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .social-links a:hover {
-            color: var(--accent);
-        }
-
-        /* Utilities */
-        .grid { display: grid; }
-        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-        .gap-4 { gap: 1rem; }
-        .gap-6 { gap: 1.5rem; }
-        .gap-8 { gap: 2rem; }
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .flex-wrap { flex-wrap: wrap; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .w-full { width: 100%; }
-        .hidden { display: none; }
-
-        /* Spacing utilities */
-        .space-y-4 > * + * { margin-top: 1rem; }
-        .space-y-6 > * + * { margin-top: 1.5rem; }
-        .space-y-8 > * + * { margin-top: 2rem; }
-        .space-y-12 > * + * { margin-top: 3rem; }
-        .mt-4 { margin-top: 1rem; }
-        .mt-6 { margin-top: 1.5rem; }
-        .mt-8 { margin-top: 2rem; }
-        .mt-12 { margin-top: 3rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-        .mb-8 { margin-bottom: 2rem; }
-        .mb-12 { margin-bottom: 3rem; }
-
-        @media (min-width: 768px) {
-            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-            .md\:flex { display: flex; }
-            .md\:flex-row { flex-direction: row; }
-            .md\:items-center { align-items: center; }
-            .md\:items-start { align-items: flex-start; }
-            .md\:justify-between { justify-content: space-between; }
-            .md\:hidden { display: none; }
-        }
-
-        /* Form elements */
-        input, textarea {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text-primary);
-            padding: 0.75rem 1rem;
-            font-family: var(--font-sans);
-            font-size: 0.875rem;
-            width: 100%;
-            transition: border-color 0.2s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Responsive nav */
-        @media (max-width: 640px) {
-            nav .container { height: auto; min-height: 4rem; flex-wrap: wrap; }
-            .nav-toggle { display: block; }
-            .nav-links { display: none; width: 100%; flex-direction: column; gap: 0; padding: 0 0 0.75rem; }
-            .nav-links.is-open { display: flex; }
-            .nav-links li { border-top: 1px solid var(--border); }
-            .nav-links a { display: block; padding: 0.65rem 0; }
-            .nav-links a::after { display: none; }
-            .hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 1rem; }
-            .case-study-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .case-study-featured { margin-left: 0; margin-right: 0; padding: 2rem 1.25rem; }
-            .featured-aside { border-left: 0; border-top: 1px solid rgba(239, 248, 243, 0.2); padding-left: 0; padding-top: 1.5rem; }
-            .project-header { grid-template-columns: 1fr; gap: 1.5rem; }
-            .section-heading { align-items: flex-start; flex-direction: column; }
-            h1 { font-size: 2.25rem; }
-            h2 { font-size: 1.5rem; }
-            footer .container { align-items: flex-start; flex-direction: column; gap: 1rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ title }} · Harshil Agrawal{% endblock %}</title>
+<meta name="description" content="{% block description %}Harshil Agrawal, M.S. Data Science student at Virginia Tech. I turn messy data into models people actually use, from a WhatsApp ordering assistant that has handled 10,000+ orders to an IEEE paper on deep reinforcement learning for trading.{% endblock %}">
+{% block meta %}
+<link rel="canonical" href="{{ site_url }}{{ request.url.path }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Harshil Agrawal">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="{{ self.description() }}">
+<meta property="og:url" content="{{ site_url }}{{ request.url.path }}">
+<meta name="twitter:card" content="summary">
+{% endblock %}
+<meta name="theme-color" content="#f2f1ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/static/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/site.css?v={{ v }}">
+<script>
+// Before paint: saved theme and Code choice, and whether cells wait to "run" on scroll.
+// Any script or resource error (captured) drops nb-io, so outputs can never stay hidden.
+try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; if (localStorage.getItem('code') === 'off') document.documentElement.classList.add('code-off'); } catch (e) {}
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('nb-io');
+    addEventListener('error', function () { document.documentElement.classList.remove('nb-io'); }, true);
+}
+</script>
+<script src="/static/notebook.js?v={{ v }}" defer></script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Person", "name": "Harshil Agrawal", "url": "{{ site_url }}/", "jobTitle": "Data and AI Engineer", "affiliation": {"@type": "CollegeOrUniversity", "name": "Virginia Tech"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "SVKM's NMIMS University"}, "sameAs": ["https://github.com/Harshil411", "https://www.linkedin.com/in/harshil-agrawal/"]}
+</script>
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <nav>
-        <div class="container">
-            <a href="/" class="nav-brand">Harshil Agrawal</a>
-            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
-            <ul class="nav-links" id="primary-navigation">
-                <li><a href="/"{% if request.url.path == '/' %} aria-current="page"{% endif %}>Home</a></li>
-                <li><a href="/projects"{% if request.url.path == '/projects' %} aria-current="page"{% endif %}>Projects</a></li>
-                <li><a href="/demo"{% if request.url.path == '/demo' %} aria-current="page"{% endif %}>ML Demo</a></li>
-                <li><a href="/resume"{% if request.url.path == '/resume' %} aria-current="page"{% endif %}>Resume</a></li>
-                <li><a href="/contact"{% if request.url.path == '/contact' %} aria-current="page"{% endif %}>Contact</a></li>
-            </ul>
-        </div>
+<a class="skip" href="#nb">Skip to content</a>
+
+<header class="bar">
+    <a class="brand" href="/"><span class="mark" aria-hidden="true">HA</span><span class="brand-name">Harshil Agrawal</span></a>
+    <nav class="tabs" aria-label="Primary">
+        <ul>
+            {% for key, href, name, ext, kind in [
+                ("home", "#top" if tab == "home" else "/", "harshil_agrawal", ".ipynb", ""),
+                ("work", "/#work", "work", ".ipynb", ""),
+                ("model", "/demo", "model", ".ipynb", ""),
+                ("resume", "/resume", "resume", ".pdf", " t-pdf"),
+                ("contact", "/#contact", "contact", ".md", " t-md"),
+            ] %}
+            <li><a class="tab{{ kind }}" href="{{ href }}"{% if tab == key %} aria-current="page"{% endif %}><span>{{ name }}<span class="ext" aria-hidden="true">{{ ext }}</span></span></a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <div class="bar-end">
+        <p class="kernel" data-busy="false" title="Notebook status: idle means ready, busy means a cell is running"><span class="dot" aria-hidden="true"></span>Python 3.11 <span class="sep" aria-hidden="true">|</span> <span class="k-state">idle</span></p>
+        <button class="btn-code" type="button" aria-pressed="true" title="Show or hide the code. The results stay."><span class="sw" aria-hidden="true"></span>Code</button>
+        <button class="icon-btn theme-toggle" type="button" aria-pressed="false" aria-label="Dark theme" title="Toggle dark theme">
+            <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+            <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
+    </div>
+</header>
+
+<div class="app">
+    <nav class="toc" aria-label="Contents">
+        <p class="toc-title">Contents</p>
+        <ol>{% block toc %}{% endblock %}</ol>
     </nav>
 
-    <main id="main-content">
-        <div class="container">
+    <main id="nb" class="nb" tabindex="-1">
+        <div class="sheet">
             {% block content %}{% endblock %}
         </div>
     </main>
+</div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Harshil Agrawal. Built with FastAPI.</p>
-            <div class="social-links">
-                <a href="https://github.com/Harshil411" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://www.linkedin.com/in/harshil-agrawal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="mailto:harshilsagrawal@gmail.com">Email</a>
-            </div>
-        </div>
-    </footer>
-    <script>
-        const navToggle = document.querySelector('.nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        navToggle.addEventListener('click', () => {
-            const isOpen = navLinks.classList.toggle('is-open');
-            navToggle.setAttribute('aria-expanded', isOpen);
-            navToggle.textContent = isOpen ? 'Close' : 'Menu';
-        });
-    </script>
+<footer class="statusbar">
+    <p><span>Python 3.11 · <span class="k-state">idle</span></span>{% if code_cells %}<span>{{ code_cells }} code cells</span>{% endif %}<span class="keys"><kbd>J</kbd> <kbd>K</kbd> move · <kbd>⇧</kbd><kbd>↵</kbd> run cell</span></p>
+    <p><span>© 2026 Harshil Agrawal · Blacksburg, VA</span><span>FastAPI on GCE · no analytics</span></p>
+</footer>
+<p class="sr-only" role="status" id="copy-status"></p>
 </body>
 </html>

@@ -42,6 +42,7 @@ importances = model.feature_importances_.tolist()
 
 meta = {
     "accuracy": round(accuracy, 4),
+    "baseline_accuracy": round(1 - y_test.mean(), 4),  # always guessing "no defect"
     "feature_names": feature_names,
     "feature_importances": dict(zip(feature_names, [round(x, 4) for x in importances])),
     "train_samples": len(X_train),

@@ -1,106 +1,116 @@
 {% extends "base.html" %}
+{% from "_macros.html" import code, live_cell with context %}
+{% set tab = "home" %}
+{% set code_cells = projects | length + 4 %}
+{% block title %}Harshil Agrawal · harshil_agrawal.ipynb{% endblock %}
+
+{% block toc %}
+<li class="h1"><a href="#top">Harshil Agrawal</a></li>
+<li class="h2"><a href="#glance">At a glance</a></li>
+<li class="h2"><a href="#work">Selected work</a>
+    <ol>{% for p in projects %}<li class="h3"><a href="#{{ p.slug }}">{{ p.name }}</a></li>{% endfor %}</ol>
+</li>
+<li class="h2"><a href="#model">Live model</a></li>
+<li class="h2"><a href="#contact">Get in touch</a></li>
+{% endblock %}
+
 {% block content %}
-<div>
-    <section class="hero">
-        <div>
-            <p class="eyebrow" style="margin-bottom: 1rem;">Data systems · applied ML · research</p>
-            <h1 class="hero-title" style="margin-bottom: 1.5rem;">Harshil Agrawal</h1>
-            <p class="hero-summary text-secondary">I build data and AI systems that make it from an ambiguous business problem to a deployed, testable product—then examine how they behave in the real world.</p>
-            <div class="flex flex-wrap" style="gap: 0.75rem; margin-top: 2rem;">
-                <a href="/projects" class="btn btn-primary">Read selected work <span aria-hidden="true">→</span></a>
-                <a href="/demo" class="btn btn-outline">Inspect ML demo</a>
-            </div>
-        </div>
-        <aside class="signal-panel" aria-label="Current availability">
-            <p class="signal-index">Field note / 2026 to 27</p>
-            <div class="signal-row"><span>Graduate study</span><span>MS Data Science<br>Virginia Tech</span></div>
-            <div class="signal-row"><span>Seeking</span><span>GA roles · research<br>ML / DS internships</span></div>
-            <div class="signal-row"><span>Relocating</span><span>Blacksburg, VA<br>Aug 2026</span></div>
-        </aside>
-    </section>
-
-    <section style="margin-top: 4.5rem;">
-        <div class="section-heading">
-            <div>
-                <p class="eyebrow" style="margin-bottom: 0.5rem;">Selected work</p>
-                <h2>Systems with an evidence trail.</h2>
-            </div>
-            <a href="/projects" class="text-accent font-mono" style="font-size: 0.8rem; text-decoration: none;">ALL PROJECTS →</a>
-        </div>
-
-        <article class="case-study case-study-featured">
-            <div class="case-study-grid">
-                <div>
-                    <p class="featured-label">Featured case / 01</p>
-                    <p class="case-number" style="margin-bottom: 0.75rem;">Production LLM Platform</p>
-                    <h3 style="font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 0.9rem;">Conversational ordering for pharmaceutical distribution.</h3>
-                    <p class="text-secondary">Owned the build of a WhatsApp inquiry platform that pairs Azure OpenAI intent classification with a Snowflake-backed product and conversation layer—designed for always-on ordering workflows.</p>
-                    <div class="architecture">
-                        <p class="architecture-title">System trace</p>
-                        <div class="pipeline"><span>WhatsApp inquiry</span><i>→</i><span>Intent classification</span><i>→</i><span>Product context</span><i>→</i><span>Snowflake logs</span></div>
-                    </div>
-                </div>
-                <div class="featured-aside">
-                    <div class="case-metric"><strong>1,500+</strong><span class="case-meta">product catalog entries in scope</span></div>
-                    <p class="case-meta" style="margin-bottom: 0.75rem;">ROLE</p>
-                    <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Data & AI Engineering Intern<br>Prowess Consulting</p>
-                    <div class="flex flex-wrap" style="gap: 0.4rem;"><span class="tag">Azure OpenAI</span><span class="tag">Snowflake</span><span class="tag">Azure App Service</span></div>
-                    <p class="case-status">Employer-owned work</p>
-                    <p class="evidence">Built during an industrial internship. The system is shown here at an architectural level.</p>
-                </div>
-            </div>
-        </article>
-
-        <article class="case-study">
-            <div class="case-study-grid">
-                <div>
-                    <p class="case-number" style="margin-bottom: 0.75rem;">02 / SALESVITALS</p>
-                    <h3 style="font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 0.9rem;">An analytics stack designed around operational constraints.</h3>
-                    <p class="text-secondary">Built a FastAPI data product for pharmaceutical field representatives, then introduced a SQLite snapshot mode and GitHub Actions validation so insight delivery did not depend on recurring warehouse queries.</p>
-                    <div class="architecture">
-                        <p class="architecture-title">Delivery path</p>
-                        <div class="pipeline"><span>Source data</span><i>→</i><span>Versioned snapshot</span><i>→</i><span>FastAPI</span><i>→</i><span>Field insight</span></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="case-metric"><strong>0</strong><span class="case-meta">recurring Snowflake query cost for snapshot delivery</span></div>
-                    <p class="case-meta" style="margin-bottom: 0.75rem;">FOCUS</p>
-                    <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Reproducibility, data access, and deployment discipline.</p>
-                    <div class="flex flex-wrap" style="gap: 0.4rem;"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">GitHub Actions</span></div>
-                    <p class="case-status">Employer-owned work</p>
-                    <p class="evidence">Built during an industrial internship. The delivery decision and its constraint are shown here.</p>
-                </div>
-            </div>
-        </article>
-
-        <article class="case-study">
-            <div class="case-study-grid">
-                <div>
-                    <p class="case-number" style="margin-bottom: 0.75rem;">03 / PRIVACY-AWARE ML</p>
-                    <h3 style="font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: 0.9rem;">Banking PII protection for sensitive text workflows.</h3>
-                    <p class="text-secondary">Built a local-first service that extracts and anonymizes personally identifiable information in banking text, combining multilingual transformer models with schema-based validation to make each detected entity inspectable.</p>
-                    <div class="architecture">
-                        <p class="architecture-title">Protection path</p>
-                        <div class="pipeline"><span>Sensitive text</span><i>→</i><span>PII extraction</span><i>→</i><span>Schema validation</span><i>→</i><span>Anonymized output</span></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="case-metric"><strong>0.84</strong><span class="case-meta">reported micro-F1 across 32,017 labeled entities</span></div>
-                    <p class="case-meta" style="margin-bottom: 0.75rem;">FOCUS</p>
-                    <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">Privacy-preserving ML, local inference, and validation-aware entity extraction.</p>
-                    <div class="flex flex-wrap" style="gap: 0.4rem; margin-bottom: 1.25rem;"><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Hugging Face</span><span class="tag">PII</span></div>
-                    <a href="https://github.com/Harshil411/banking_PII" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View source ↗</a>
-                    <p class="case-status">Open source</p>
-                    <p class="evidence">Repository includes the FastAPI service, React interface, and local model setup.</p>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section class="accent-border" style="margin-top: 3rem;">
-        <p class="eyebrow" style="margin-bottom: 0.5rem;">Research direction</p>
-        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem;">Forecasting, decision-making, and evaluation under uncertainty.</h2>
-        <p class="text-secondary" style="max-width: 45rem;">My current research explores a hybrid LSTM + Deep RL framework for decision support and automated trading, evaluated on NIFTY-50 backtests. The IEEE ICCICT 2026 paper is under publication.</p>
-    </section>
+<div class="cell md hero" id="top">
+    <div class="body">
+        <p class="eyebrow">M.S. Data Science · Virginia Tech</p>
+        <h1>Harshil Agrawal</h1>
+        <p class="lede">I turn messy data into models people actually use.</p>
+        <p class="proof">From a WhatsApp ordering assistant that has handled <a href="#llm-ordering-platform">10,000+ orders</a> to an <a href="#lstm-drl-trading">IEEE paper</a> on deep reinforcement learning for trading.</p>
+        <p class="open"><span class="status status--public">Open to GA roles, research &amp; Summer 2027 ML/DS internships</span></p>
+        <p class="actions"><a class="btn primary" href="#work">Read the work <span aria-hidden="true">↓</span></a><a class="btn" href="/static/Harshil_Agrawal_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a><a class="text-link" href="#model">or try the live model <span aria-hidden="true">↓</span></a></p>
+        <p class="howto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span class="h-on">This page is a working Python notebook: grey boxes are code, and the result sits under each one. Prefer a plain read? <button class="linkish" type="button" data-code-toggle>Hide the code</button></span><span class="h-off">You're reading the results only. This page is really a working Python notebook. <button class="linkish" type="button" data-code-toggle>Show the code</button></span></p>
+    </div>
 </div>
+
+{% call code(1, 'harshil<span class="op">.</span><span class="fn">about</span>()' | safe, id="glance", title="At a glance") %}
+<div class="result">
+    <dl class="facts">
+        <div><dt>Studying</dt><dd>M.S. Data Science, Virginia Tech <span class="when">Aug 2026 – May 2028</span></dd></div>
+        <div><dt>Previously</dt><dd>Data &amp; AI Engineering Intern, Prowess Consulting <span class="when">Dec 2025 – Jun 2026</span></dd></div>
+        <div><dt>Degree</dt><dd>B.Tech Computer Engineering, NMIMS (MPSTME), Mumbai <span class="when">May 2026</span></dd></div>
+        <div><dt>Research</dt><dd>Hybrid LSTM + deep RL for trading, IEEE ICCICT 2026 <span class="when">accepted</span></dd></div>
+        <div><dt>Based in</dt><dd>Blacksburg, VA</dd></div>
+    </dl>
+</div>
+{% endcall %}
+
+{% set measured = projects | selectattr('metric') | list %}
+{% call code(2, '<span class="cm"># each project, and the number that backs it up</span>\nevidence' | safe) %}
+<div class="result">
+    <div class="df-wrap" tabindex="0" role="region" aria-label="Evidence table">
+        <table class="df">
+            <thead><tr><th><span class="sr-only">Row</span></th><th>project</th><th class="r">value</th><th>measure</th><th class="c-status">status</th></tr></thead>
+            <tbody>
+                {% for p in measured %}
+                <tr><th scope="row">{{ loop.index0 }}</th><td><a href="#{{ p.slug }}">{{ p.name }}</a></td><td class="r v">{{ p.metric.value }}</td><td class="c-measure">{{ p.metric.short }}</td><td class="c-status">{{ p.status }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="df-shape">{{ measured | length }} rows × 4 columns</p>
+</div>
+{% endcall %}
+
+<div class="cell md" id="work">
+    <div class="body">
+        <h2>Selected work</h2>
+        <p>Five projects. Each one shows what it does, how data flows through it, and the result that backs it up. Open <em>Why I built it this way</em> for the tradeoffs.</p>
+    </div>
+</div>
+
+{% for p in projects %}
+{% set src %}<span class="fn">Case</span>(<span class="st">"{{ p.slug }}"</span>){% endset %}
+{% call code(loop.index + 2, src, id=p.slug) %}
+<article class="result case-out" aria-labelledby="{{ p.slug }}-t">
+    <p class="case-meta"><span class="status status--{{ p.status_tone }}">{{ p.status }}</span><span class="ctx">{{ p.context }}</span></p>
+    <h3 class="case-t" id="{{ p.slug }}-t">{{ p.name }}</h3>
+    <p class="case-deck">{{ p.headline }}</p>
+    <p class="case-sum">{{ p.summary }}</p>
+    <figure class="trace">
+        <figcaption>Fig. {{ p.no }} · {{ p.trace_label }}</figcaption>
+        <ol>{% for s in p.trace %}<li style="--k: {{ loop.index0 }}"><span class="tn" aria-hidden="true">{{ '%02d' % loop.index }}</span>{{ s }}</li>{% endfor %}</ol>
+    </figure>
+    <div class="case-facts">
+        {% if p.metric %}<p class="metric"><b>{{ p.metric.value }}</b><span>{{ p.metric.label }}</span></p>{% endif %}
+        <p class="stack"><span class="sr-only">Stack: {{ p.tags | join(', ') }}</span><code aria-hidden="true">stack <span class="op">=</span> [{% for t in p.tags %}<span class="st">'{{ t }}'</span>{{ ', ' if not loop.last }}{% endfor %}]</code></p>
+    </div>
+    <div class="case-foot">
+        {% if p.links %}<p class="case-links">{% for l in p.links %}<a href="{{ '#model' if l.href == '/demo' else l.href }}"{% if l.external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ l.label }} <span aria-hidden="true">{{ '↗' if l.external else '→' }}</span></a>{% endfor %}</p>{% endif %}
+        {% if p.decisions %}<details class="dec"><summary>Why I built it this way <span class="dec-n">({{ p.decisions | length }})</span></summary><ul>{% for d in p.decisions %}<li>{{ d }}</li>{% endfor %}</ul></details>{% endif %}
+    </div>
+</article>
+{% endcall %}
+{% endfor %}
+
+<div class="cell md" id="model">
+    <div class="body">
+        <h2>Live model</h2>
+        <p>This model predicts whether a manufactured part is likely to be defective from five machine-sensor readings. Pick a scenario or move a slider, and the model running on this server answers instantly. <span class="note">It's trained on synthetic data by design, so it shows serving and honest evaluation, not real-factory performance.</span></p>
+    </div>
+</div>
+
+{{ live_cell(projects | length + 3, "/demo", "full model card →") }}
+
+<div class="cell md" id="contact">
+    <div class="body"><h2>Get in touch</h2></div>
+</div>
+
+{% call code(projects | length + 4, 'harshil<span class="op">.</span><span class="fn">contact</span>()' | safe) %}
+<div class="result">
+    <p class="c-lede">Have a role or a research question? Email works best.</p>
+    <a class="email" href="mailto:{{ email }}">{{ email }}</a>
+    <p class="c-actions"><button class="btn" type="button" data-copy="{{ email }}" data-fallback="mailto:{{ email }}">Copy email</button><a class="btn primary" href="mailto:{{ email }}?subject=Portfolio%20inquiry">Write to Harshil <span aria-hidden="true">→</span></a></p>
+    <ul class="c-links">
+        <li><a href="https://github.com/Harshil411" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://www.linkedin.com/in/harshil-agrawal/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+        <li><a href="/static/Harshil_Agrawal_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+    </ul>
+    <p class="c-note"><span class="status status--public">Open to GA roles, research &amp; Summer 2027 internships</span> · it's <time id="bb-time">—</time> in Blacksburg, VA</p>
+</div>
+{% endcall %}
 {% endblock %}
